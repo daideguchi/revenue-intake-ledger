@@ -236,9 +236,9 @@ export const h0ProofRequirements: ProofRequirement[] = [
     note: "Start project appears on the H0 page."
   },
   {
-    label: "AWS/v0 credits issued",
+    label: "AWS credit applied",
     status: "done",
-    note: "Credits were issued by Devpost email. Redemption and billing-account proof are still required."
+    note: "AWS Billing shows the promotional credit active. v0 credit remains optional unless used for the final demo."
   },
   {
     label: "Published Vercel URL",
