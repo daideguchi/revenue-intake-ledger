@@ -34,7 +34,7 @@ This is still not final-submission-ready until the demo video and Devpost final 
 - [x] AWS storage configuration screenshot captured
 - [ ] Architecture diagram attached
 - [x] 3-5 minute demo video generated locally at `media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4`
-- [x] Demo video uploaded / attached through an accepted Devpost route: `https://youtu.be/ru7BCxLP4R0`
+- [x] Demo video uploaded / attached through an accepted Devpost route: `https://youtu.be/ElNmYpwx5x4`
 - [ ] Devpost final page shows `Project submitted!`
 
 ## AWS Commands After Zero-Cost Proof
