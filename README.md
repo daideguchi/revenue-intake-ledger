@@ -33,6 +33,7 @@ GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Product submission: not submitted yet
 AWS DB proof: connected and verified
+Demo video: https://youtu.be/ru7BCxLP4R0
 Cost policy: no out-of-pocket spend allowed
 ```
 
@@ -128,7 +129,7 @@ This boundary has now been cleared for the minimal DynamoDB proof table. Keep mo
 - DynamoDB table live proof: done
 - AWS storage configuration screenshot: captured
 - Architecture diagram
-- 3-5 minute demo video: generated locally, upload pending
+- 3-5 minute demo video: https://youtu.be/ru7BCxLP4R0
 - Devpost finalization page showing submitted state
 
 Until all of this exists, this is a build lane, not a submitted project.

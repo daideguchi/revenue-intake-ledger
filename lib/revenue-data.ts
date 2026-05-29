@@ -65,15 +65,15 @@ export const seedOpportunities: RevenueOpportunity[] = [
     plainStatus: "Registered, AWS credit applied, product not submitted",
     audience: "Small AI builders and SaaS teams",
     problem: "They track submissions, evidence, prize terms, and payout tasks across too many places.",
-    nextAction: "Record the 3-5 minute demo, attach the DynamoDB proof screenshot, then finish Devpost.",
+    nextAction: "Attach the YouTube demo, architecture diagram, and AWS storage proof in Devpost, then final submit.",
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
     evidenceUrl: "https://h01.devpost.com/",
-    evidenceCount: 4,
-    payoutTaskCount: 4,
+    evidenceCount: 5,
+    payoutTaskCount: 5,
     risk: "DynamoDB is live, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
-    aiSuggestion: "The core H0 proof is now real. Keep monitoring costs, record the demo, and submit only after the final package is complete."
+    aiSuggestion: "The core H0 proof and demo video are real. Keep monitoring costs and submit only after the final Devpost package is complete."
   },
   {
     id: "coexistence",
@@ -184,6 +184,15 @@ export const seedEvidenceItems: EvidenceItem[] = [
     note: "Vercel scope detected as team_qU2jjQVZXVCwq9lXlmxu4aaM / daideguchis-projects."
   },
   {
+    id: "h0-demo-video",
+    opportunityId: "h0",
+    label: "3-5 minute demo video",
+    kind: "public_url",
+    status: "attached",
+    url: "https://youtu.be/ru7BCxLP4R0",
+    note: "Natural English narrated demo uploaded as an unlisted YouTube video."
+  },
+  {
     id: "shipyard-devpost",
     opportunityId: "shipyard",
     label: "Devpost submitted state",
@@ -209,6 +218,14 @@ export const seedPayoutTasks: PayoutTask[] = [
     label: "Provision and seed DynamoDB",
     status: "done",
     due: "Completed before demo video",
+    owner: "builder"
+  },
+  {
+    id: "h0-demo-video",
+    opportunityId: "h0",
+    label: "Upload 3-5 minute demo video",
+    status: "done",
+    due: "Completed before final submit",
     owner: "builder"
   },
   {
@@ -262,8 +279,13 @@ export const h0ProofRequirements: ProofRequirement[] = [
   },
   {
     label: "3-5 minute demo video",
+    status: "done",
+    note: "Natural English demo uploaded to YouTube: https://youtu.be/ru7BCxLP4R0"
+  },
+  {
+    label: "Devpost final submitted state",
     status: "waiting",
-    note: "Record after DynamoDB is live."
+    note: "Do not mark submitted until the final Devpost page shows Project submitted."
   }
 ];
 

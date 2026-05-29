@@ -31,7 +31,7 @@ Here is the live public app on Vercel. The green status card shows that producti
 
 Each revenue lane stores the product, the program, the audience, the problem, the next action, the award date, prize range, AI suggestion, and risk. For example, the H0 lane says the AWS credit is applied, DynamoDB is live, and the next action is to record the three to five minute demo and finish Devpost. The app is intentionally honest: registered does not mean submitted.
 
-The H0 proof board is the final gate. It shows Devpost registration, AWS credit applied, published Vercel URL, Vercel Team ID, live DynamoDB source, and the AWS storage screenshot. The only remaining item before final submission is this demo video.
+The H0 proof board is the final gate. It shows Devpost registration, AWS credit applied, published Vercel URL, Vercel Team ID, live DynamoDB source, the AWS storage screenshot, and the demo video. The only remaining boundary is the final Devpost submitted state.
 
 The API proof is public and machine-readable. The health endpoint reports database equals dynamodb. The opportunities, evidence, and payout task endpoints report source equals dynamodb colon Revenue Intake Ledger. The proof endpoint still returns h0Ready false because the final Devpost submit has not happened yet. That is the safety boundary.
 
@@ -222,7 +222,7 @@ async function renderSlides() {
       eyebrow: "H0 Proof",
       title: "Ready means the database is real.",
       body: "The proof board keeps the submission honest and blocks final submit until the required evidence exists.",
-      bullets: ["AWS credit applied", "Live DynamoDB source", "Storage screenshot captured", "Demo video is the last gate"],
+      bullets: ["AWS credit applied", "Live DynamoDB source", "Storage screenshot captured", "Final Devpost submit is the last gate"],
       image: path.join(OUT, "capture-03-proof-board.png"),
       accent: "green"
     },
