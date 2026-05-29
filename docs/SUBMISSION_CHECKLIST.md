@@ -20,9 +20,9 @@ This is not final-submission-ready.
 
 ## Must Be True Before Final Submit
 
-- [ ] AWS budget limit checked
-- [ ] AWS billing alert checked
-- [ ] Cost guardrails reviewed: `docs/COST_GUARDRAILS.md`
+- [ ] Zero-cost policy reviewed: `docs/COST_GUARDRAILS.md`
+- [ ] H0/AWS promotional credits or another no-out-of-pocket route confirmed
+- [ ] AWS billing alert checked as an extra warning
 - [ ] DynamoDB table created
 - [ ] `npm run seed:dynamodb` passed
 - [ ] `npm run verify:dynamodb` passed
@@ -34,7 +34,7 @@ This is not final-submission-ready.
 - [ ] 3-5 minute demo video recorded
 - [ ] Devpost final page shows `Project submitted!`
 
-## AWS Commands After Human Approval
+## AWS Commands After Zero-Cost Proof
 
 ```bash
 aws cloudformation deploy \
@@ -57,3 +57,7 @@ AWS_SECRET_ACCESS_KEY
 ```
 
 Use Vercel project settings or CLI. Never commit real values.
+
+## Hard Stop
+
+If out-of-pocket AWS cost cannot be ruled out, do not run the AWS commands and do not submit H0 as complete.

@@ -41,6 +41,8 @@ Resources:
           Value: revenue-intake-ledger
         - Key: hackathon
           Value: h0-zero-stack
+        - Key: cost_policy
+          Value: no-out-of-pocket
 
 Outputs:
   TableName:

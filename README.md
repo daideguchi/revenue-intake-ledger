@@ -31,9 +31,11 @@ GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Product submission: not submitted yet
 AWS DB proof: not connected yet
+Cost policy: no out-of-pocket spend allowed
 ```
 
 Do not call this H0-ready until DynamoDB is connected and the AWS storage configuration screenshot exists.
+If DynamoDB cannot be proven without real charges to DD, keep H0 unsubmitted.
 
 ## H0 Fit
 
@@ -79,7 +81,7 @@ npm run build
 npm audit
 ```
 
-After AWS is approved and configured:
+Only after a no-out-of-pocket AWS route is confirmed:
 
 ```bash
 aws cloudformation deploy \
@@ -100,11 +102,14 @@ The official H0 credits request has been submitted, but credits are not guarante
 Before connecting AWS:
 
 - create or confirm the AWS account
-- set a budget limit
-- set a billing alert
+- confirm H0/AWS promotional credits or another zero-cost route
+- confirm that the proof path will not create out-of-pocket spend
+- set a billing alert as an extra warning
 - use the smallest DynamoDB setup that proves real storage
 - keep point-in-time recovery off for the proof table unless explicitly approved
 - capture screenshots only after the cost boundary is clear
+
+If that cannot be proven, do not create AWS resources and do not submit H0 as complete.
 
 ## Submission Checklist
 
