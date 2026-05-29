@@ -92,7 +92,7 @@ export default async function Page() {
           <p>{nextItem.nextAction}</p>
           <div className="hint">
             <strong>Submission boundary</strong>
-            <span>H0 is not ready for Devpost final submit until AWS DB proof is captured.</span>
+            <span>H0 is not submitted until the Devpost final page shows Project submitted.</span>
           </div>
         </aside>
 
@@ -160,8 +160,7 @@ export default async function Page() {
           <h2>The database is the product memory.</h2>
           <p>
             DynamoDB stores opportunities, evidence items, prize terms, payout tasks, status history, and AI suggestions.
-            The current public preview shows the full workflow shape while AWS credentials and cost controls are being
-            prepared.
+            The current production app is connected to DynamoDB, and the proof board keeps final submission claims honest.
           </p>
         </div>
         <ul>
