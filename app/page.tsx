@@ -1,5 +1,5 @@
 import { listOpportunities } from "../lib/dynamodb";
-import { getLedgerHealth } from "../lib/revenue-data";
+import { getLedgerHealth, h0ProofRequirements, summarizeLedger } from "../lib/revenue-data";
 
 const statusLabels = {
   submitted: "Submitted",
@@ -19,8 +19,7 @@ const jaStatusLabels = {
 
 export default async function Page() {
   const [{ items, source }, health] = await Promise.all([listOpportunities(), Promise.resolve(getLedgerHealth())]);
-  const submitted = items.filter((item) => item.status === "submitted").length;
-  const open = items.length - submitted;
+  const summary = summarizeLedger();
   const nextItem = items.find((item) => item.status !== "submitted") || items[0];
 
   return (
@@ -69,20 +68,20 @@ export default async function Page() {
 
       <section className="metrics" aria-label="Current operating metrics">
         <article>
-          <span>{items.length}</span>
+          <span>{summary.opportunities}</span>
           <p>tracked opportunities</p>
         </article>
         <article>
-          <span>{submitted}</span>
+          <span>{summary.submitted}</span>
           <p>submitted lanes</p>
         </article>
         <article>
-          <span>{open}</span>
-          <p>open follow-ups</p>
+          <span>{summary.evidenceItems}</span>
+          <p>evidence records</p>
         </article>
         <article>
-          <span>{health.database === "dynamodb" ? "AWS" : "Seed"}</span>
-          <p>current data source</p>
+          <span>{summary.blockedTasks}</span>
+          <p>blocked tasks</p>
         </article>
       </section>
 
@@ -136,6 +135,14 @@ export default async function Page() {
                     <dt>賞金幅</dt>
                     <dd>{item.prizeRange}</dd>
                   </div>
+                  <div>
+                    <dt>AI提案</dt>
+                    <dd>{item.aiSuggestion}</dd>
+                  </div>
+                  <div>
+                    <dt>リスク</dt>
+                    <dd>{item.risk}</dd>
+                  </div>
                 </dl>
                 <footer>
                   <span>{jaStatusLabels[item.status]}</span>
@@ -163,6 +170,26 @@ export default async function Page() {
           <li>status_history: who changed what and why</li>
           <li>payout_tasks: forms, deadlines, expected receipt windows</li>
         </ul>
+      </section>
+
+      <section className="proof-board" aria-label="H0 proof checklist">
+        <div>
+          <p className="eyebrow">H0 proof board</p>
+          <h2>Ready means the database is real.</h2>
+          <p>
+            This board keeps the current preview honest. A public URL alone is not enough for H0. The final package
+            needs live DynamoDB proof, storage screenshots, a diagram, and a short demo.
+          </p>
+        </div>
+        <div className="proof-grid">
+          {h0ProofRequirements.map((item) => (
+            <article key={item.label} className={`proof ${item.status}`}>
+              <span>{item.status}</span>
+              <strong>{item.label}</strong>
+              <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );

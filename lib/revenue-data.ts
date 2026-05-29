@@ -18,6 +18,35 @@ export type RevenueOpportunity = {
   payoutEstimate: string;
   prizeRange: string;
   evidenceUrl: string;
+  evidenceCount: number;
+  payoutTaskCount: number;
+  risk: string;
+  aiSuggestion: string;
+};
+
+export type EvidenceItem = {
+  id: string;
+  opportunityId: string;
+  label: string;
+  kind: "public_url" | "verification" | "screenshot" | "email" | "manual_note";
+  status: "attached" | "missing" | "stale";
+  url?: string;
+  note: string;
+};
+
+export type PayoutTask = {
+  id: string;
+  opportunityId: string;
+  label: string;
+  status: "done" | "waiting" | "blocked";
+  due: string;
+  owner: "builder" | "organizer" | "sponsor";
+};
+
+export type ProofRequirement = {
+  label: string;
+  status: "done" | "waiting" | "blocked";
+  note: string;
 };
 
 export type LedgerHealth = {
@@ -40,7 +69,11 @@ export const seedOpportunities: RevenueOpportunity[] = [
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
-    evidenceUrl: "https://h01.devpost.com/"
+    evidenceUrl: "https://h01.devpost.com/",
+    evidenceCount: 3,
+    payoutTaskCount: 4,
+    risk: "AWS database proof is still missing.",
+    aiSuggestion: "Do not submit yet. Connect DynamoDB, capture storage proof, and record Vercel Team ID first."
   },
   {
     id: "coexistence",
@@ -54,7 +87,11 @@ export const seedOpportunities: RevenueOpportunity[] = [
     awardDate: "2026-06-20 15:00 PT",
     payoutEstimate: "If selected, safest estimate is late August 2026.",
     prizeRange: "$1,000-$10,000 cash",
-    evidenceUrl: "https://mod-tools-migration.devpost.com/"
+    evidenceUrl: "https://mod-tools-migration.devpost.com/",
+    evidenceCount: 6,
+    payoutTaskCount: 3,
+    risk: "Winner paperwork is future-dependent.",
+    aiSuggestion: "Monitor announcement date and prepare tax/payment documents."
   },
   {
     id: "shipyard",
@@ -68,7 +105,11 @@ export const seedOpportunities: RevenueOpportunity[] = [
     awardDate: "2026-09-04",
     payoutEstimate: "If selected, after organizer payment instructions.",
     prizeRange: "$7,000-$48,000 equivalent",
-    evidenceUrl: "https://ogc2026.devpost.com/"
+    evidenceUrl: "https://ogc2026.devpost.com/",
+    evidenceCount: 7,
+    payoutTaskCount: 4,
+    risk: "Official platform submission remains separate from Devpost.",
+    aiSuggestion: "Wait for the official algorithm submission window, then upload the verified package."
   },
   {
     id: "domain-roulette",
@@ -82,7 +123,11 @@ export const seedOpportunities: RevenueOpportunity[] = [
     awardDate: "2026-06-10 16:00 EDT",
     payoutEstimate: "Gift/domain credits or cash depending on award.",
     prizeRange: "$1,000-$2,500 cash plus domain credits",
-    evidenceUrl: "https://devpost.com/software/domain-roulette-launch-lab"
+    evidenceUrl: "https://devpost.com/software/domain-roulette-launch-lab",
+    evidenceCount: 5,
+    payoutTaskCount: 2,
+    risk: "Official random domain assignment is not visible yet.",
+    aiSuggestion: "Do not final submit sample domains unless the rule risk is explicitly accepted."
   },
   {
     id: "ignite64",
@@ -96,7 +141,129 @@ export const seedOpportunities: RevenueOpportunity[] = [
     awardDate: "After official judging",
     payoutEstimate: "Organizer instructions after winner contact.",
     prizeRange: "$2,200 pool",
-    evidenceUrl: "https://www.i64.in/register"
+    evidenceUrl: "https://www.i64.in/register",
+    evidenceCount: 2,
+    payoutTaskCount: 2,
+    risk: "Official hacking window has not started.",
+    aiSuggestion: "Keep this as a registration record until the build window opens."
+  }
+];
+
+export const seedEvidenceItems: EvidenceItem[] = [
+  {
+    id: "h0-devpost-registered",
+    opportunityId: "h0",
+    label: "Devpost registration state",
+    kind: "verification",
+    status: "attached",
+    url: "https://h01.devpost.com/",
+    note: "H0 page shows Start project, which means registration is active."
+  },
+  {
+    id: "h0-credit-request",
+    opportunityId: "h0",
+    label: "AWS/v0 credit request",
+    kind: "manual_note",
+    status: "attached",
+    note: "Official Google Form showed Your response has been recorded. Credits are requested, not guaranteed."
+  },
+  {
+    id: "h0-dynamodb-proof",
+    opportunityId: "h0",
+    label: "DynamoDB storage proof",
+    kind: "screenshot",
+    status: "missing",
+    note: "Required before final H0 submission."
+  },
+  {
+    id: "h0-vercel-team-id",
+    opportunityId: "h0",
+    label: "Vercel Team ID",
+    kind: "manual_note",
+    status: "attached",
+    note: "Vercel scope detected as team_qU2jjQVZXVCwq9lXlmxu4aaM / daideguchis-projects."
+  },
+  {
+    id: "shipyard-devpost",
+    opportunityId: "shipyard",
+    label: "Devpost submitted state",
+    kind: "public_url",
+    status: "attached",
+    url: "https://devpost.com/software/shipyard-solver-lab",
+    note: "Public Devpost page exists; official scoring follow-up is still separate."
+  }
+];
+
+export const seedPayoutTasks: PayoutTask[] = [
+  {
+    id: "h0-cost-guardrail",
+    opportunityId: "h0",
+    label: "Confirm AWS budget and billing alarm",
+    status: "blocked",
+    due: "Before DynamoDB provisioning",
+    owner: "builder"
+  },
+  {
+    id: "h0-dynamodb-live",
+    opportunityId: "h0",
+    label: "Provision and seed DynamoDB",
+    status: "blocked",
+    due: "Before demo video",
+    owner: "builder"
+  },
+  {
+    id: "h0-submit",
+    opportunityId: "h0",
+    label: "Final Devpost submit",
+    status: "waiting",
+    due: "2026-06-29 17:00 PDT",
+    owner: "builder"
+  },
+  {
+    id: "coexistence-results",
+    opportunityId: "coexistence",
+    label: "Check winner announcement",
+    status: "waiting",
+    due: "2026-06-20 15:00 PT",
+    owner: "organizer"
+  }
+];
+
+export const h0ProofRequirements: ProofRequirement[] = [
+  {
+    label: "Devpost registration",
+    status: "done",
+    note: "Start project appears on the H0 page."
+  },
+  {
+    label: "AWS/v0 credits request",
+    status: "done",
+    note: "The official form was submitted; grant is not guaranteed."
+  },
+  {
+    label: "Published Vercel URL",
+    status: "done",
+    note: "Preview is live at revenue-intake-ledger-public.vercel.app."
+  },
+  {
+    label: "Vercel Team ID",
+    status: "done",
+    note: "team_qU2jjQVZXVCwq9lXlmxu4aaM / daideguchis-projects."
+  },
+  {
+    label: "Live DynamoDB source",
+    status: "blocked",
+    note: "AWS credentials and cost guardrails are required first."
+  },
+  {
+    label: "AWS storage screenshot",
+    status: "blocked",
+    note: "Capture after live table is provisioned and seeded."
+  },
+  {
+    label: "3-5 minute demo video",
+    status: "waiting",
+    note: "Record after DynamoDB is live."
   }
 ];
 
@@ -118,5 +285,22 @@ export function getLedgerHealth(): LedgerHealth {
     tableName,
     writable: false,
     boundary: "Preview mode is using bundled seed data. Do not submit to H0 until DynamoDB is connected and proven."
+  };
+}
+
+export function summarizeLedger() {
+  const submitted = seedOpportunities.filter((item) => item.status === "submitted").length;
+  const open = seedOpportunities.length - submitted;
+  const missingEvidence = seedEvidenceItems.filter((item) => item.status !== "attached").length;
+  const blockedTasks = seedPayoutTasks.filter((item) => item.status === "blocked").length;
+
+  return {
+    opportunities: seedOpportunities.length,
+    submitted,
+    open,
+    evidenceItems: seedEvidenceItems.length,
+    missingEvidence,
+    payoutTasks: seedPayoutTasks.length,
+    blockedTasks
   };
 }

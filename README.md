@@ -26,6 +26,9 @@ Japanese:
 ```text
 Devpost registration: done
 AWS/v0 credit request: submitted
+Vercel preview: https://revenue-intake-ledger-public.vercel.app/
+GitHub: https://github.com/daideguchi/revenue-intake-ledger
+Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Product submission: not submitted yet
 AWS DB proof: not connected yet
 ```
@@ -54,6 +57,17 @@ AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
 ```
 
+API routes:
+
+- `/api/health`
+- `/api/opportunities`
+- `/api/evidence`
+- `/api/payout-tasks`
+- `/api/proof`
+
+Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+Final gate: [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)
+
 ## Local Development
 
 ```bash
@@ -61,6 +75,20 @@ npm install
 npm run dev
 npm run verify
 npm run build
+npm audit
+```
+
+After AWS is approved and configured:
+
+```bash
+aws cloudformation deploy \
+  --stack-name revenue-intake-ledger \
+  --template-file infra/dynamodb-table.cloudformation.yml \
+  --parameter-overrides TableName=RevenueIntakeLedger \
+  --capabilities CAPABILITY_NAMED_IAM
+
+AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run seed:dynamodb
+AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run verify:dynamodb
 ```
 
 ## Cost Boundary

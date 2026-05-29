@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Minimal DynamoDB table for Revenue Intake Ledger H0 proof.
+
+Parameters:
+  TableName:
+    Type: String
+    Default: RevenueIntakeLedger
+
+Resources:
+  RevenueIntakeLedgerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TableName
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk
+          AttributeType: S
+        - AttributeName: sk
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      SSESpecification:
+        SSEEnabled: true
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: project
+          Value: revenue-intake-ledger
+        - Key: hackathon
+          Value: h0-zero-stack
+
+Outputs:
+  TableName:
+    Value: !Ref RevenueIntakeLedgerTable
+  TableArn:
+    Value: !GetAtt RevenueIntakeLedgerTable.Arn

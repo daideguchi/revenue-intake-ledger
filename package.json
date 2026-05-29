@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "seed:dynamodb": "node --experimental-strip-types scripts/seed-dynamodb.mjs",
+    "verify:dynamodb": "node scripts/verify-dynamodb.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.826.0",
