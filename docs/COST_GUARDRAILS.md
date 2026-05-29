@@ -15,6 +15,9 @@ Do not create AWS resources if real charges could land on DD.
 ```text
 AWS CLI on this Mac: not installed as of 2026-05-29 JST
 AWS credentials in this shell: not present
+H0 AWS/v0 credit email: received on 2026-05-30 JST
+Raw credit codes: stored only in ignored local secrets file
+Credit redemption: pending
 Public app database: preview-seed
 Final H0 submission: not ready
 ```
@@ -22,14 +25,35 @@ Final H0 submission: not ready
 ## Before Any AWS Resource Is Created
 
 - Confirm the AWS account to use.
-- Confirm that H0/AWS promotional credits or a clearly free route are active for the account.
+- Redeem the H0 AWS promotional credit on the intended billing account.
+- Confirm the credit is visible on that same account.
 - Confirm that the selected DynamoDB proof path will not create out-of-pocket spend.
+- Monitor AWS Cost Explorer.
 - Create or confirm a budget alert as an additional warning only.
 - Keep the DynamoDB proof table small.
 - Do not enable extra paid features.
 - Take screenshots only after the budget boundary is clear.
 
 If any of those checks are unclear, stop. Keep the product in preview mode and do not submit H0.
+
+## Issued Credit Boundary
+
+The Devpost email says:
+
+```text
+AWS Promotional Credits: $100
+v0 Credits: $30
+Additional charges beyond the $100 AWS credit are the participant's responsibility.
+Monitor usage in AWS Cost Explorer.
+```
+
+That means the credit email helps, but it is not enough by itself. The zero-cost path is proven only after the AWS credit is redeemed on the correct billing account and usage is watched.
+
+Do not commit raw credit codes. They belong only in:
+
+```text
+/Users/dd/000_AI組織/.個人フォルダ/機密/h0_aws_v0_credits.env
+```
 
 ## DynamoDB Template Boundary
 

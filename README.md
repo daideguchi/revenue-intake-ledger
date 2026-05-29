@@ -25,7 +25,8 @@ Japanese:
 
 ```text
 Devpost registration: done
-AWS/v0 credit request: submitted
+AWS/v0 credit request: approved
+AWS/v0 credit redemption: pending
 Vercel preview: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
@@ -36,6 +37,7 @@ Cost policy: no out-of-pocket spend allowed
 
 Do not call this H0-ready until DynamoDB is connected and the AWS storage configuration screenshot exists.
 If DynamoDB cannot be proven without real charges to DD, keep H0 unsubmitted.
+The issued credit codes are stored only in the local ignored secrets file and must never be committed or pasted into public surfaces.
 
 ## H0 Fit
 
@@ -97,13 +99,20 @@ AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run verify:dynamodb
 ## Cost Boundary
 
 AWS CLI is not installed on this Mac as of 2026-05-29 JST.
-The official H0 credits request has been submitted, but credits are not guaranteed yet.
+The official H0 credits email arrived on 2026-05-30 JST with `$100` AWS Promotional Credits and `$30` v0 credits. The raw codes are intentionally not in this repository.
+
+Important expiration dates:
+
+- AWS code redeem by `2026-07-31`; AWS credits expire `2026-12-31`.
+- v0 code redeem by `2026-07-13`; v0 credits expire 6 weeks after redemption.
 
 Before connecting AWS:
 
 - create or confirm the AWS account
-- confirm H0/AWS promotional credits or another zero-cost route
+- redeem the AWS promotional credit on the intended billing account
+- confirm the credit is applied to the same account that will run DynamoDB
 - confirm that the proof path will not create out-of-pocket spend
+- monitor AWS Cost Explorer
 - set a billing alert as an extra warning
 - use the smallest DynamoDB setup that proves real storage
 - keep point-in-time recovery off for the proof table unless explicitly approved
