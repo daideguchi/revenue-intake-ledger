@@ -173,7 +173,7 @@ export const seedEvidenceItems: EvidenceItem[] = [
     label: "DynamoDB storage proof",
     kind: "screenshot",
     status: "attached",
-    note: "AWS Console shows RevenueIntakeLedger with 14 scanned items. Redacted screenshot captured in the AI organization evidence folder."
+    note: "AWS Console shows the RevenueIntakeLedger table, and the live API now reads 17 seeded DynamoDB items. Redacted screenshot captured in the AI organization evidence folder."
   },
   {
     id: "h0-vercel-team-id",
@@ -259,7 +259,7 @@ export const h0ProofRequirements: ProofRequirement[] = [
   {
     label: "Devpost registration",
     status: "done",
-    note: "Start project appears on the H0 page."
+    note: "Registration was completed and the final Devpost project was submitted."
   },
   {
     label: "AWS credit applied",

@@ -27,7 +27,7 @@ Japanese:
 Devpost registration: done
 AWS/v0 credit request: approved
 AWS credit redemption: applied and visible in AWS Billing
-v0 credit redemption: pending
+v0 credit redemption: optional / not used for this final submission
 Vercel preview: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
