@@ -73,6 +73,7 @@ API routes:
 Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 Final gate: [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)
 Cost guardrails: [docs/COST_GUARDRAILS.md](docs/COST_GUARDRAILS.md)
+Demo video workflow: [docs/DEMO_VIDEO.md](docs/DEMO_VIDEO.md)
 
 ## Local Development
 
@@ -127,7 +128,7 @@ This boundary has now been cleared for the minimal DynamoDB proof table. Keep mo
 - DynamoDB table live proof: done
 - AWS storage configuration screenshot: captured
 - Architecture diagram
-- 3-5 minute demo video
+- 3-5 minute demo video: generated locally, upload pending
 - Devpost finalization page showing submitted state
 
 Until all of this exists, this is a build lane, not a submitted project.

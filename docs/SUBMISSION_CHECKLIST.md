@@ -33,7 +33,8 @@ This is still not final-submission-ready until the demo video and Devpost final 
 - [x] Vercel production `/api/opportunities` says `source=dynamodb:<table>`
 - [x] AWS storage configuration screenshot captured
 - [ ] Architecture diagram attached
-- [ ] 3-5 minute demo video recorded
+- [x] 3-5 minute demo video generated locally at `media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4`
+- [ ] Demo video uploaded / attached through an accepted Devpost route
 - [ ] Devpost final page shows `Project submitted!`
 
 ## AWS Commands After Zero-Cost Proof

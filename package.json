@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "demo:video": "node scripts/build-demo-video.mjs",
     "verify": "node scripts/verify.mjs",
     "seed:dynamodb": "node --experimental-strip-types scripts/seed-dynamodb.mjs",
     "verify:dynamodb": "node scripts/verify-dynamodb.mjs"
