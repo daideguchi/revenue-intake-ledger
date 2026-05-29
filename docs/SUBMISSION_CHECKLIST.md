@@ -15,7 +15,7 @@ Vercel Team: daideguchis-projects
 
 ```text
 Current public API says database=dynamodb.
-This is still not final-submission-ready until the demo video and Devpost final submit are complete.
+The H0 Devpost final submit is complete. The remaining work is monitoring cost, winner results, and payout paperwork.
 ```
 
 ## Must Be True Before Final Submit
@@ -23,7 +23,7 @@ This is still not final-submission-ready until the demo video and Devpost final 
 - [x] Zero-cost policy reviewed: `docs/COST_GUARDRAILS.md`
 - [x] H0 AWS promotional credit redeemed on the intended AWS billing account
 - [x] AWS billing credits view confirms the credit is visible
-- [ ] v0 credit redeemed if v0 is used for the final demo
+- [ ] v0 credit redeemed if v0 is used later
 - [x] AWS billing alert checked as an extra warning
 - [x] DynamoDB table created
 - [x] `npm run seed:dynamodb` passed
@@ -32,10 +32,16 @@ This is still not final-submission-ready until the demo video and Devpost final 
 - [x] Vercel production `/api/health` says `database=dynamodb`
 - [x] Vercel production `/api/opportunities` says `source=dynamodb:<table>`
 - [x] AWS storage configuration screenshot captured
-- [ ] Architecture diagram attached
+- [x] Architecture diagram attached
 - [x] 3-5 minute demo video generated locally at `media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4`
 - [x] Demo video uploaded / attached through an accepted Devpost route: `https://youtu.be/ElNmYpwx5x4`
-- [ ] Devpost final page shows `Project submitted!`
+- [x] Devpost final page shows `Project submitted!`
+
+Submitted project:
+
+```text
+https://devpost.com/software/revenue-intake-ledger
+```
 
 ## AWS Commands After Zero-Cost Proof
 

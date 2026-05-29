@@ -28,9 +28,11 @@ The narration uses the macOS English voice `Samantha` so the English demo is not
 
 ## Submission Boundary
 
-After the video is generated:
+This boundary has been cleared for H0. The demo video is uploaded and the Devpost final submit succeeded.
 
-- listen to the narration
-- confirm it is between 3 and 5 minutes
-- upload it to YouTube or attach it through the accepted Devpost route
-- only then proceed to the final H0 Devpost submit
+Post-submit checks:
+
+- keep the YouTube URL reachable
+- keep the public Vercel app reachable
+- keep `/api/health` showing `database=dynamodb`
+- keep AWS usage monitored because promotional credits are not a hard spending cap

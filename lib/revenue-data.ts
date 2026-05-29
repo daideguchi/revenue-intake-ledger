@@ -61,19 +61,19 @@ export const seedOpportunities: RevenueOpportunity[] = [
     id: "h0",
     product: "Revenue Intake Ledger",
     program: "H0: Hack the Zero Stack",
-    status: "registered",
-    plainStatus: "Registered, AWS credit applied, product not submitted",
+    status: "submitted",
+    plainStatus: "Submitted to H0 Devpost",
     audience: "Small AI builders and SaaS teams",
     problem: "They track submissions, evidence, prize terms, and payout tasks across too many places.",
-    nextAction: "Attach the YouTube demo, architecture diagram, and AWS storage proof in Devpost, then final submit.",
+    nextAction: "Monitor the H0 result date, AWS usage, and any payout paperwork from organizers.",
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
-    evidenceUrl: "https://h01.devpost.com/",
-    evidenceCount: 5,
+    evidenceUrl: "https://devpost.com/software/revenue-intake-ledger",
+    evidenceCount: 6,
     payoutTaskCount: 5,
-    risk: "DynamoDB is live, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
-    aiSuggestion: "The core H0 proof and demo video are real. Keep monitoring costs and submit only after the final Devpost package is complete."
+    risk: "Submitted and backed by DynamoDB, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
+    aiSuggestion: "The final Devpost submission is complete. Keep the AWS table minimal, monitor Cost Explorer, and prepare winner/payout follow-up."
   },
   {
     id: "coexistence",
@@ -153,11 +153,11 @@ export const seedEvidenceItems: EvidenceItem[] = [
   {
     id: "h0-devpost-registered",
     opportunityId: "h0",
-    label: "Devpost registration state",
+    label: "Devpost submitted state",
     kind: "verification",
     status: "attached",
-    url: "https://h01.devpost.com/",
-    note: "H0 page shows Start project, which means registration is active."
+    url: "https://devpost.com/software/revenue-intake-ledger",
+    note: "Final Devpost page showed Project submitted after the H0 submission flow."
   },
   {
     id: "h0-credit-request",
@@ -191,6 +191,15 @@ export const seedEvidenceItems: EvidenceItem[] = [
     status: "attached",
     url: "https://youtu.be/ElNmYpwx5x4",
     note: "Natural English narrated demo uploaded as an unlisted YouTube video."
+  },
+  {
+    id: "h0-final-submit-proof",
+    opportunityId: "h0",
+    label: "Final H0 public Devpost page",
+    kind: "public_url",
+    status: "attached",
+    url: "https://devpost.com/software/revenue-intake-ledger",
+    note: "Public project page exists and the post-submit readback showed Project submitted."
   },
   {
     id: "shipyard-devpost",
@@ -232,8 +241,8 @@ export const seedPayoutTasks: PayoutTask[] = [
     id: "h0-submit",
     opportunityId: "h0",
     label: "Final Devpost submit",
-    status: "waiting",
-    due: "2026-06-29 17:00 PDT",
+    status: "done",
+    due: "Completed 2026-05-30 JST",
     owner: "builder"
   },
   {
@@ -270,7 +279,7 @@ export const h0ProofRequirements: ProofRequirement[] = [
   {
     label: "Live DynamoDB source",
     status: "done",
-    note: "Production API reads from dynamodb:RevenueIntakeLedger with 14 seeded items."
+    note: "Production API reads from dynamodb:RevenueIntakeLedger."
   },
   {
     label: "AWS storage screenshot",
@@ -284,8 +293,8 @@ export const h0ProofRequirements: ProofRequirement[] = [
   },
   {
     label: "Devpost final submitted state",
-    status: "waiting",
-    note: "Do not mark submitted until the final Devpost page shows Project submitted."
+    status: "done",
+    note: "Final H0 page showed Project submitted and public project page is https://devpost.com/software/revenue-intake-ledger."
   }
 ];
 

@@ -31,14 +31,14 @@ v0 credit redemption: pending
 Vercel preview: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
-Product submission: not submitted yet
+Devpost submission: https://devpost.com/software/revenue-intake-ledger
+Product submission: submitted
 AWS DB proof: connected and verified
 Demo video: https://youtu.be/ElNmYpwx5x4
 Cost policy: no out-of-pocket spend allowed
 ```
 
-Do not call this H0-ready until the demo video is recorded and the Devpost finalization page shows submitted state.
-If DynamoDB cannot be proven without real charges to DD, keep H0 unsubmitted.
+H0 is now submitted. Keep the AWS proof setup tiny and monitored because promotional credits are not a hard spending cap.
 The issued credit codes are stored only in the local ignored secrets file and must never be committed or pasted into public surfaces.
 
 ## H0 Fit
@@ -130,6 +130,12 @@ This boundary has now been cleared for the minimal DynamoDB proof table. Keep mo
 - AWS storage configuration screenshot: captured
 - Architecture diagram
 - 3-5 minute demo video: https://youtu.be/ElNmYpwx5x4
-- Devpost finalization page showing submitted state
+- Devpost finalization page showing submitted state: done
 
-Until all of this exists, this is a build lane, not a submitted project.
+Submitted project:
+
+```text
+https://devpost.com/software/revenue-intake-ledger
+```
+
+The active post-submit job is monitoring: award date, AWS usage, organizer messages, and any payout paperwork.
