@@ -65,15 +65,15 @@ export const seedOpportunities: RevenueOpportunity[] = [
     plainStatus: "Registered, AWS credit applied, product not submitted",
     audience: "Small AI builders and SaaS teams",
     problem: "They track submissions, evidence, prize terms, and payout tasks across too many places.",
-    nextAction: "Create budget guardrails, connect the smallest DynamoDB proof, capture AWS storage proof.",
+    nextAction: "Record the 3-5 minute demo, attach the DynamoDB proof screenshot, then finish Devpost.",
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
     evidenceUrl: "https://h01.devpost.com/",
-    evidenceCount: 3,
+    evidenceCount: 4,
     payoutTaskCount: 4,
-    risk: "AWS credit is active, but AWS has no hard spending cap; usage must stay tiny and monitored.",
-    aiSuggestion: "Do not submit yet. Set the cost guardrails, connect DynamoDB, and capture real storage proof before Devpost."
+    risk: "DynamoDB is live, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
+    aiSuggestion: "The core H0 proof is now real. Keep monitoring costs, record the demo, and submit only after the final package is complete."
   },
   {
     id: "coexistence",
@@ -172,8 +172,8 @@ export const seedEvidenceItems: EvidenceItem[] = [
     opportunityId: "h0",
     label: "DynamoDB storage proof",
     kind: "screenshot",
-    status: "missing",
-    note: "Required before final H0 submission."
+    status: "attached",
+    note: "AWS Console shows RevenueIntakeLedger with 14 scanned items. Redacted screenshot captured in the AI organization evidence folder."
   },
   {
     id: "h0-vercel-team-id",
@@ -199,16 +199,16 @@ export const seedPayoutTasks: PayoutTask[] = [
     id: "h0-cost-guardrail",
     opportunityId: "h0",
     label: "Confirm AWS budget and billing alarm",
-    status: "blocked",
-    due: "Before DynamoDB provisioning",
+    status: "done",
+    due: "Completed before DynamoDB proof",
     owner: "builder"
   },
   {
     id: "h0-dynamodb-live",
     opportunityId: "h0",
     label: "Provision and seed DynamoDB",
-    status: "blocked",
-    due: "Before demo video",
+    status: "done",
+    due: "Completed before demo video",
     owner: "builder"
   },
   {
@@ -252,13 +252,13 @@ export const h0ProofRequirements: ProofRequirement[] = [
   },
   {
     label: "Live DynamoDB source",
-    status: "blocked",
-    note: "AWS credit is visible. Next create budget guardrails, then provision the smallest DynamoDB proof table."
+    status: "done",
+    note: "Production API reads from dynamodb:RevenueIntakeLedger with 14 seeded items."
   },
   {
     label: "AWS storage screenshot",
-    status: "blocked",
-    note: "Capture after live table is provisioned and seeded."
+    status: "done",
+    note: "Redacted AWS Console screenshot captured for the RevenueIntakeLedger table."
   },
   {
     label: "3-5 minute demo video",

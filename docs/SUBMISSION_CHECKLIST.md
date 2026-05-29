@@ -14,24 +14,24 @@ Vercel Team: daideguchis-projects
 ## Current Boundary
 
 ```text
-Current public API says database=preview-seed.
-This is not final-submission-ready.
+Current public API says database=dynamodb.
+This is still not final-submission-ready until the demo video and Devpost final submit are complete.
 ```
 
 ## Must Be True Before Final Submit
 
-- [ ] Zero-cost policy reviewed: `docs/COST_GUARDRAILS.md`
+- [x] Zero-cost policy reviewed: `docs/COST_GUARDRAILS.md`
 - [x] H0 AWS promotional credit redeemed on the intended AWS billing account
 - [x] AWS billing credits view confirms the credit is visible
 - [ ] v0 credit redeemed if v0 is used for the final demo
-- [ ] AWS billing alert checked as an extra warning
-- [ ] DynamoDB table created
-- [ ] `npm run seed:dynamodb` passed
-- [ ] `npm run verify:dynamodb` passed
-- [ ] Vercel env vars set for AWS/DynamoDB
-- [ ] Vercel production `/api/health` says `database=dynamodb`
-- [ ] Vercel production `/api/opportunities` says `source=dynamodb:<table>`
-- [ ] AWS storage configuration screenshot captured
+- [x] AWS billing alert checked as an extra warning
+- [x] DynamoDB table created
+- [x] `npm run seed:dynamodb` passed
+- [x] `npm run verify:dynamodb` passed
+- [x] Vercel env vars set for AWS/DynamoDB
+- [x] Vercel production `/api/health` says `database=dynamodb`
+- [x] Vercel production `/api/opportunities` says `source=dynamodb:<table>`
+- [x] AWS storage configuration screenshot captured
 - [ ] Architecture diagram attached
 - [ ] 3-5 minute demo video recorded
 - [ ] Devpost final page shows `Project submitted!`

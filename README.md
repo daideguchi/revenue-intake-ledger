@@ -32,11 +32,11 @@ Vercel preview: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Product submission: not submitted yet
-AWS DB proof: not connected yet
+AWS DB proof: connected and verified
 Cost policy: no out-of-pocket spend allowed
 ```
 
-Do not call this H0-ready until DynamoDB is connected and the AWS storage configuration screenshot exists.
+Do not call this H0-ready until the demo video is recorded and the Devpost finalization page shows submitted state.
 If DynamoDB cannot be proven without real charges to DD, keep H0 unsubmitted.
 The issued credit codes are stored only in the local ignored secrets file and must never be committed or pasted into public surfaces.
 
@@ -84,7 +84,7 @@ npm run build
 npm audit
 ```
 
-Only after a no-out-of-pocket AWS route is confirmed:
+AWS proof commands used after the no-out-of-pocket route was confirmed:
 
 ```bash
 aws cloudformation deploy \
@@ -118,14 +118,14 @@ Before connecting AWS:
 - keep point-in-time recovery off for the proof table unless explicitly approved
 - capture screenshots only after the cost boundary is clear
 
-If that cannot be proven, do not create AWS resources and do not submit H0 as complete.
+This boundary has now been cleared for the minimal DynamoDB proof table. Keep monitoring usage and do not add broader AWS services unless explicitly needed.
 
 ## Submission Checklist
 
 - Published Vercel URL
 - Vercel Team ID
-- DynamoDB table live proof
-- AWS storage configuration screenshot
+- DynamoDB table live proof: done
+- AWS storage configuration screenshot: captured
 - Architecture diagram
 - 3-5 minute demo video
 - Devpost finalization page showing submitted state

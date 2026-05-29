@@ -20,8 +20,8 @@ Raw credit codes: stored only in ignored local secrets file
 AWS credit redemption: applied and visible in AWS Billing
 AWS billing credits view: active credit count 1, total balance $100.00, usage $0.00 as of 2026-05-30 JST
 v0 credit redemption: pending
-Public app database: preview-seed
-Final H0 submission: not ready
+Public app database: dynamodb
+Final H0 submission: not ready until demo and Devpost final submit are complete
 ```
 
 ## Before Any AWS Resource Is Created
@@ -70,7 +70,7 @@ PITR can be enabled with `EnablePointInTimeRecovery=true`, but do not do that fo
 
 ## Approved Proof Flow
 
-Run only after the zero-cost checks above are proven:
+This proof flow has been run for the minimal H0 table:
 
 ```bash
 aws cloudformation deploy \
@@ -95,10 +95,10 @@ Do not mark cleanup as complete until AWS confirms the stack is gone.
 
 ## If Zero-Cost Proof Cannot Be Guaranteed
 
-Do not provision AWS. Do not submit H0 as a completed project.
+Do not provision more AWS services. Do not submit H0 as a completed project until the demo and Devpost finalization are complete.
 
 The honest state is:
 
 ```text
-Registered, AWS credit applied, Vercel preview live, AWS proof waiting for cost-guarded DynamoDB setup.
+Registered, AWS credit applied, Vercel production reads DynamoDB, demo/final Devpost submit still pending.
 ```
