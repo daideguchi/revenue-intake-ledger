@@ -26,7 +26,8 @@ Japanese:
 ```text
 Devpost registration: done
 AWS/v0 credit request: approved
-AWS/v0 credit redemption: pending
+AWS credit redemption: applied and visible in AWS Billing
+v0 credit redemption: pending
 Vercel preview: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
@@ -109,8 +110,7 @@ Important expiration dates:
 Before connecting AWS:
 
 - create or confirm the AWS account
-- redeem the AWS promotional credit on the intended billing account
-- confirm the credit is applied to the same account that will run DynamoDB
+- confirm the AWS promotional credit is still active on the account that will run DynamoDB
 - confirm that the proof path will not create out-of-pocket spend
 - monitor AWS Cost Explorer
 - set a billing alert as an extra warning

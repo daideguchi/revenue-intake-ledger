@@ -62,18 +62,18 @@ export const seedOpportunities: RevenueOpportunity[] = [
     product: "Revenue Intake Ledger",
     program: "H0: Hack the Zero Stack",
     status: "registered",
-    plainStatus: "Registered, credits issued, redemption pending, product not submitted",
+    plainStatus: "Registered, AWS credit applied, product not submitted",
     audience: "Small AI builders and SaaS teams",
     problem: "They track submissions, evidence, prize terms, and payout tasks across too many places.",
-    nextAction: "Redeem AWS credit safely, confirm zero out-of-pocket path, connect DynamoDB, capture AWS storage proof.",
+    nextAction: "Create budget guardrails, connect the smallest DynamoDB proof, capture AWS storage proof.",
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
     evidenceUrl: "https://h01.devpost.com/",
     evidenceCount: 3,
     payoutTaskCount: 4,
-    risk: "AWS credit is issued but not yet proven redeemed on the target billing account.",
-    aiSuggestion: "Do not submit yet. First prove the AWS credit is active on the intended billing account, then connect DynamoDB and capture storage proof."
+    risk: "AWS credit is active, but AWS has no hard spending cap; usage must stay tiny and monitored.",
+    aiSuggestion: "Do not submit yet. Set the cost guardrails, connect DynamoDB, and capture real storage proof before Devpost."
   },
   {
     id: "coexistence",
@@ -165,7 +165,7 @@ export const seedEvidenceItems: EvidenceItem[] = [
     label: "AWS/v0 credits issued",
     kind: "manual_note",
     status: "attached",
-    note: "Devpost email issued $100 AWS and $30 v0 credits. Raw codes are stored only in the ignored local secrets file; redemption is still pending."
+    note: "Devpost email issued $100 AWS and $30 v0 credits. The AWS credit is applied and visible in Billing; raw codes are stored only in the ignored local secrets file."
   },
   {
     id: "h0-dynamodb-proof",
@@ -253,7 +253,7 @@ export const h0ProofRequirements: ProofRequirement[] = [
   {
     label: "Live DynamoDB source",
     status: "blocked",
-    note: "Redeem credit and confirm no out-of-pocket AWS path before provisioning."
+    note: "AWS credit is visible. Next create budget guardrails, then provision the smallest DynamoDB proof table."
   },
   {
     label: "AWS storage screenshot",

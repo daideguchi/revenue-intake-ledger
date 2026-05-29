@@ -17,7 +17,9 @@ AWS CLI on this Mac: not installed as of 2026-05-29 JST
 AWS credentials in this shell: not present
 H0 AWS/v0 credit email: received on 2026-05-30 JST
 Raw credit codes: stored only in ignored local secrets file
-Credit redemption: pending
+AWS credit redemption: applied and visible in AWS Billing
+AWS billing credits view: active credit count 1, total balance $100.00, usage $0.00 as of 2026-05-30 JST
+v0 credit redemption: pending
 Public app database: preview-seed
 Final H0 submission: not ready
 ```
@@ -25,8 +27,7 @@ Final H0 submission: not ready
 ## Before Any AWS Resource Is Created
 
 - Confirm the AWS account to use.
-- Redeem the H0 AWS promotional credit on the intended billing account.
-- Confirm the credit is visible on that same account.
+- Confirm the H0 AWS promotional credit is still visible on the same account.
 - Confirm that the selected DynamoDB proof path will not create out-of-pocket spend.
 - Monitor AWS Cost Explorer.
 - Create or confirm a budget alert as an additional warning only.
@@ -47,7 +48,7 @@ Additional charges beyond the $100 AWS credit are the participant's responsibili
 Monitor usage in AWS Cost Explorer.
 ```
 
-That means the credit email helps, but it is not enough by itself. The zero-cost path is proven only after the AWS credit is redeemed on the correct billing account and usage is watched.
+That means the credit email helps, but it is not enough by itself. The AWS credit is now visible in Billing, but the zero-cost path still requires continued usage monitoring and a deliberately tiny proof setup.
 
 Do not commit raw credit codes. They belong only in:
 
@@ -99,5 +100,5 @@ Do not provision AWS. Do not submit H0 as a completed project.
 The honest state is:
 
 ```text
-Registered, credit request submitted, Vercel preview live, AWS proof blocked by zero-cost policy.
+Registered, AWS credit applied, Vercel preview live, AWS proof waiting for cost-guarded DynamoDB setup.
 ```

@@ -21,8 +21,8 @@ This is not final-submission-ready.
 ## Must Be True Before Final Submit
 
 - [ ] Zero-cost policy reviewed: `docs/COST_GUARDRAILS.md`
-- [ ] H0 AWS promotional credit redeemed on the intended AWS billing account
-- [ ] AWS Cost Explorer or billing credits view confirms the credit is visible
+- [x] H0 AWS promotional credit redeemed on the intended AWS billing account
+- [x] AWS billing credits view confirms the credit is visible
 - [ ] v0 credit redeemed if v0 is used for the final demo
 - [ ] AWS billing alert checked as an extra warning
 - [ ] DynamoDB table created
