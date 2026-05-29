@@ -67,6 +67,7 @@ API routes:
 
 Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 Final gate: [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)
+Cost guardrails: [docs/COST_GUARDRAILS.md](docs/COST_GUARDRAILS.md)
 
 ## Local Development
 
@@ -84,7 +85,7 @@ After AWS is approved and configured:
 aws cloudformation deploy \
   --stack-name revenue-intake-ledger \
   --template-file infra/dynamodb-table.cloudformation.yml \
-  --parameter-overrides TableName=RevenueIntakeLedger \
+  --parameter-overrides TableName=RevenueIntakeLedger EnablePointInTimeRecovery=false \
   --capabilities CAPABILITY_NAMED_IAM
 
 AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run seed:dynamodb
@@ -102,6 +103,7 @@ Before connecting AWS:
 - set a budget limit
 - set a billing alert
 - use the smallest DynamoDB setup that proves real storage
+- keep point-in-time recovery off for the proof table unless explicitly approved
 - capture screenshots only after the cost boundary is clear
 
 ## Submission Checklist

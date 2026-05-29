@@ -22,6 +22,7 @@ This is not final-submission-ready.
 
 - [ ] AWS budget limit checked
 - [ ] AWS billing alert checked
+- [ ] Cost guardrails reviewed: `docs/COST_GUARDRAILS.md`
 - [ ] DynamoDB table created
 - [ ] `npm run seed:dynamodb` passed
 - [ ] `npm run verify:dynamodb` passed
@@ -39,7 +40,7 @@ This is not final-submission-ready.
 aws cloudformation deploy \
   --stack-name revenue-intake-ledger \
   --template-file infra/dynamodb-table.cloudformation.yml \
-  --parameter-overrides TableName=RevenueIntakeLedger \
+  --parameter-overrides TableName=RevenueIntakeLedger EnablePointInTimeRecovery=false \
   --capabilities CAPABILITY_NAMED_IAM
 
 AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run seed:dynamodb

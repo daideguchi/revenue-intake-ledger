@@ -5,6 +5,16 @@ Parameters:
   TableName:
     Type: String
     Default: RevenueIntakeLedger
+  EnablePointInTimeRecovery:
+    Type: String
+    Default: "false"
+    AllowedValues:
+      - "true"
+      - "false"
+    Description: Keep false for the lowest-risk H0 proof table unless DD explicitly approves PITR.
+
+Conditions:
+  UsePointInTimeRecovery: !Equals [!Ref EnablePointInTimeRecovery, "true"]
 
 Resources:
   RevenueIntakeLedgerTable:
@@ -25,7 +35,7 @@ Resources:
       SSESpecification:
         SSEEnabled: true
       PointInTimeRecoverySpecification:
-        PointInTimeRecoveryEnabled: true
+        PointInTimeRecoveryEnabled: !If [UsePointInTimeRecovery, true, false]
       Tags:
         - Key: project
           Value: revenue-intake-ledger
