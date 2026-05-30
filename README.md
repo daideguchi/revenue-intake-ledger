@@ -34,7 +34,7 @@ Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Devpost submission: https://devpost.com/software/revenue-intake-ledger
 Product submission: submitted
 AWS DB proof: connected and verified
-Demo video: https://youtu.be/ElNmYpwx5x4
+Demo video: https://youtu.be/tYj9V2s5bDY
 Cost policy: no out-of-pocket spend allowed
 ```
 
@@ -137,7 +137,7 @@ This boundary has now been cleared for the minimal DynamoDB proof table. Keep mo
 - DynamoDB table live proof: done
 - AWS storage configuration screenshot: captured
 - Architecture diagram
-- 3-5 minute demo video: https://youtu.be/ElNmYpwx5x4
+- 3-5 minute demo video: https://youtu.be/tYj9V2s5bDY
 - Devpost finalization page showing submitted state: done
 
 Submitted project:

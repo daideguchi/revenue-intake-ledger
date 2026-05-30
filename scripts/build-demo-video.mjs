@@ -29,13 +29,13 @@ This product turns that scattered follow-up into one durable ledger. The first s
 
 Here is the live public app on Vercel. The green status card shows that production is connected to DynamoDB. The operating table is reading from dynamodb colon Revenue Intake Ledger, not from a local preview file.
 
-Each revenue lane stores the product, the program, the audience, the problem, the next action, the award date, prize range, AI suggestion, and risk. For example, the H0 lane says the AWS credit is applied, DynamoDB is live, and the next action is to record the three to five minute demo and finish Devpost. The app is intentionally honest: registered does not mean submitted.
+Each revenue lane stores the product, the program, the audience, the problem, the next action, the award date, prize range, AI suggestion, and risk. For example, the H0 lane says the final Devpost submission is complete, DynamoDB is live, and the next action is to monitor the result date, AWS usage, and any payout paperwork.
 
-The H0 proof board is the final gate. It shows Devpost registration, AWS credit applied, published Vercel URL, Vercel Team ID, live DynamoDB source, the AWS storage screenshot, and the demo video. The only remaining boundary is the final Devpost submitted state.
+The new single table query proof shows why DynamoDB matters. One key, opportunity H zero, loads the whole revenue packet: the opportunity profile, evidence records, payout tasks, and status history. This is a real data model, not just a dashboard with fake numbers.
 
-The API proof is public and machine-readable. The health endpoint reports database equals dynamodb. The opportunities, evidence, and payout task endpoints report source equals dynamodb colon Revenue Intake Ledger. The proof endpoint still returns h0Ready false because the final Devpost submit has not happened yet. That is the safety boundary.
+The API proof is public and machine-readable. The health endpoint reports database equals dynamodb. The H zero bundle endpoint reports key condition equals opportunity H zero. The proof endpoint returns h0Ready true and live counts from DynamoDB, including status events.
 
-On AWS, the table Revenue Intake Ledger exists in DynamoDB and contains the seeded operating records. The runtime access is scoped to a dedicated IAM user with a DynamoDB-only policy. A warning budget exists, and the setup stays deliberately small because the promotional credit is useful, but it is not a hard spending cap.
+On AWS, the table Revenue Intake Ledger exists in DynamoDB and contains the operating records. The runtime access is scoped to a dedicated IAM user with a DynamoDB-only policy. A warning budget exists, and the setup stays deliberately small because the promotional credit is useful, but it is not a hard spending cap.
 
 So the value is practical. Revenue Intake Ledger helps a small team keep proof, deadlines, payout tasks, and AI recommendations in one place. For H0, it demonstrates a real Vercel app backed by AWS DynamoDB. For builders, it turns the messy after-shipping work into a system that protects future revenue.
 
@@ -68,8 +68,15 @@ async function captureAppScreenshots() {
   await page.waitForTimeout(500);
   await page.screenshot({ path: path.join(OUT, "capture-03-proof-board.png") });
 
+  await page.locator(".query-proof").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(500);
+  await page.screenshot({ path: path.join(OUT, "capture-04-query-proof.png") });
+
   await page.goto(`${LIVE_URL}/api/proof`, { waitUntil: "networkidle" });
-  await page.screenshot({ path: path.join(OUT, "capture-04-api-proof.png") });
+  await page.screenshot({ path: path.join(OUT, "capture-05-api-proof.png") });
+
+  await page.goto(`${LIVE_URL}/api/h0-bundle`, { waitUntil: "networkidle" });
+  await page.screenshot({ path: path.join(OUT, "capture-06-h0-bundle.png") });
 
   await browser.close();
 }
@@ -221,26 +228,34 @@ async function renderSlides() {
     {
       eyebrow: "H0 Proof",
       title: "Ready means the database is real.",
-      body: "The proof board keeps the submission honest and blocks final submit until the required evidence exists.",
-      bullets: ["AWS credit applied", "Live DynamoDB source", "Storage screenshot captured", "Final Devpost submit is the last gate"],
+      body: "The proof board keeps the submission honest and shows that the final H0 package is complete.",
+      bullets: ["AWS credit applied", "Live DynamoDB source", "Storage screenshot captured", "Final Devpost submit completed"],
       image: path.join(OUT, "capture-03-proof-board.png"),
+      accent: "green"
+    },
+    {
+      eyebrow: "DynamoDB Model",
+      title: "One key loads the whole revenue packet.",
+      body: "The single-table access pattern loads one submission with its profile, evidence, payout tasks, and status history.",
+      bullets: ["PK = OPPORTUNITY#h0", "Evidence records", "Payout tasks", "Status history"],
+      image: path.join(OUT, "capture-04-query-proof.png"),
       accent: "green"
     },
     {
       eyebrow: "Public API",
       title: "Machine-readable proof.",
-      body: "The deployed API reports DynamoDB as the source of truth, while h0Ready stays false until Devpost is actually submitted.",
+      body: "The deployed API reports DynamoDB as the source of truth and h0Ready is true after the final Devpost submission.",
       code: `/api/health -> database=dynamodb
 /api/opportunities -> source=dynamodb:RevenueIntakeLedger
-/api/evidence -> source=dynamodb:RevenueIntakeLedger
-/api/payout-tasks -> source=dynamodb:RevenueIntakeLedger
-/api/proof -> h0Ready=false until final Devpost submit`
+/api/h0-bundle -> PK = OPPORTUNITY#h0
+/api/proof -> h0Ready=true
+/api/proof -> statusEvents=5`
     },
     {
       eyebrow: "AWS Storage",
       title: "Real DynamoDB, small cost footprint.",
       body: "The table stores the operating records. Access is scoped to a dedicated DynamoDB-only runtime user.",
-      bullets: ["RevenueIntakeLedger table", "14 seeded records", "On-demand billing", "Budget warning guardrail"],
+      bullets: ["RevenueIntakeLedger table", "22 seeded records", "On-demand billing", "Budget warning guardrail"],
       image: DYNAMODB_SCREENSHOT
     },
     {
@@ -250,6 +265,7 @@ async function renderSlides() {
       code: `Vercel / Next.js app
   -> /api/health
   -> /api/opportunities
+  -> /api/h0-bundle
   -> /api/evidence
   -> /api/payout-tasks
   -> /api/proof
@@ -257,7 +273,8 @@ async function renderSlides() {
 AWS DynamoDB
   -> OPPORTUNITY#<id> / PROFILE
   -> OPPORTUNITY#<id> / EVIDENCE#<id>
-  -> OPPORTUNITY#<id> / PAYOUT#<id>`
+  -> OPPORTUNITY#<id> / PAYOUT#<id>
+  -> OPPORTUNITY#<id> / STATUS#<timestamp>`
     },
     {
       eyebrow: "Outcome",

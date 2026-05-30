@@ -200,8 +200,8 @@ export const seedEvidenceItems: EvidenceItem[] = [
     label: "3-5 minute demo video",
     kind: "public_url",
     status: "attached",
-    url: "https://youtu.be/ElNmYpwx5x4",
-    note: "Natural English narrated demo uploaded as an unlisted YouTube video."
+    url: "https://youtu.be/tYj9V2s5bDY",
+    note: "Updated Natural English narrated demo uploaded as an unlisted YouTube video."
   },
   {
     id: "h0-final-submit-proof",
@@ -353,7 +353,7 @@ export const h0ProofRequirements: ProofRequirement[] = [
   {
     label: "3-5 minute demo video",
     status: "done",
-    note: "Natural English final demo uploaded to YouTube: https://youtu.be/ElNmYpwx5x4"
+    note: "Updated Natural English final demo uploaded to YouTube: https://youtu.be/tYj9V2s5bDY"
   },
   {
     label: "Devpost final submitted state",
