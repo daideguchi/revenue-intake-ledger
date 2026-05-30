@@ -1,5 +1,5 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, QueryCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 
 const tableName = process.env.DYNAMODB_TABLE;
 const region = process.env.AWS_REGION || "us-east-1";
@@ -28,6 +28,23 @@ if (!byEntity.opportunity || !byEntity.evidence || !byEntity.payout_task || !byE
   throw new Error(`DynamoDB proof incomplete: ${JSON.stringify(byEntity)}`);
 }
 
+const queue = await doc.send(
+  new QueryCommand({
+    TableName: tableName,
+    KeyConditionExpression: "#pk = :pk",
+    ExpressionAttributeNames: {
+      "#pk": "pk"
+    },
+    ExpressionAttributeValues: {
+      ":pk": "WORK_QUEUE#open"
+    }
+  })
+);
+
+if ((queue.Items || []).length < 2) {
+  throw new Error(`work queue proof too thin: ${(queue.Items || []).length}`);
+}
+
 console.log(
-  `revenue_intake_ledger_dynamodb_verify_ok table=${tableName} rows=${items.length} entities=${JSON.stringify(byEntity)}`
+  `revenue_intake_ledger_dynamodb_verify_ok table=${tableName} rows=${items.length} entities=${JSON.stringify(byEntity)} work_queue_open_actions=${(queue.Items || []).length}`
 );

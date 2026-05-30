@@ -99,6 +99,48 @@ export async function listPayoutTasks(): Promise<{ items: PayoutTask[]; source: 
   };
 }
 
+export async function listOpenActionQueue(): Promise<{
+  items: PayoutTask[];
+  source: string;
+  accessPath: string;
+  keyCondition: string;
+}> {
+  const health = getLedgerHealth();
+  const accessPath = "base-table-item-collection";
+  const keyCondition = "PK = WORK_QUEUE#open";
+
+  if (health.database !== "dynamodb" || !health.tableName) {
+    return {
+      items: seedPayoutTasks
+        .filter((item) => item.status !== "done")
+        .sort((a, b) => a.due.localeCompare(b.due)),
+      source: "preview-seed",
+      accessPath,
+      keyCondition
+    };
+  }
+
+  const response = await getDocumentClient().send(
+    new QueryCommand({
+      TableName: health.tableName,
+      KeyConditionExpression: "#pk = :pk",
+      ExpressionAttributeNames: {
+        "#pk": "pk"
+      },
+      ExpressionAttributeValues: {
+        ":pk": "WORK_QUEUE#open"
+      }
+    })
+  );
+
+  return {
+    items: (response.Items || []) as PayoutTask[],
+    source: `dynamodb:${health.tableName}/WORK_QUEUE#open`,
+    accessPath,
+    keyCondition
+  };
+}
+
 export async function listStatusEvents(): Promise<{ items: StatusEvent[]; source: string }> {
   const health = getLedgerHealth();
 

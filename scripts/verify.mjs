@@ -34,16 +34,18 @@ server.stderr.on("data", (chunk) => {
 
 try {
   await waitForServer();
-  const [healthRes, itemsRes, bundleRes, proofRes, pageRes] = await Promise.all([
+  const [healthRes, itemsRes, bundleRes, actionQueueRes, proofRes, pageRes] = await Promise.all([
     fetch(`${baseUrl}/api/health`),
     fetch(`${baseUrl}/api/opportunities`),
     fetch(`${baseUrl}/api/h0-bundle`),
+    fetch(`${baseUrl}/api/action-queue`),
     fetch(`${baseUrl}/api/proof`),
     fetch(baseUrl)
   ]);
   const health = await healthRes.json();
   const items = await itemsRes.json();
   const bundle = await bundleRes.json();
+  const actionQueue = await actionQueueRes.json();
   const proof = await proofRes.json();
   const html = await pageRes.text();
 
@@ -51,12 +53,21 @@ try {
   if (!Array.isArray(items.items) || items.items.length < 5) throw new Error("opportunity rows missing");
   if (!bundle.ok || bundle.query.keyCondition !== "PK = OPPORTUNITY#h0") throw new Error("h0 bundle query proof missing");
   if ((bundle.counts.evidence || 0) < 3) throw new Error("h0 evidence bundle too thin");
+  if (!actionQueue.ok || actionQueue.query.keyCondition !== "PK = WORK_QUEUE#open") {
+    throw new Error("action queue access proof missing");
+  }
+  if ((actionQueue.counts.openActions || 0) < 2) throw new Error("action queue is too thin");
   if (!proof.ok || !proof.metrics || proof.metrics.statusEvents < 1) throw new Error("proof metrics missing status history");
+  if (!proof.workQueueProof || proof.workQueueProof.keyCondition !== "PK = WORK_QUEUE#open") {
+    throw new Error("proof work queue access pattern missing");
+  }
   if (!html.includes("Revenue Intake Ledger")) throw new Error("landing dashboard missing title");
   if (!html.includes("小さなAIチーム")) throw new Error("Japanese guidance missing");
   if (!html.includes("DynamoDB")) throw new Error("database boundary missing");
   if (!html.includes("Single-table query proof")) throw new Error("single-table query proof missing");
   if (!html.includes("OPPORTUNITY#h0")) throw new Error("DynamoDB key proof missing");
+  if (!html.includes("AWS credit use")) throw new Error("AWS credit use section missing");
+  if (!html.includes("PK = WORK_QUEUE#open")) throw new Error("work queue proof missing");
 
   console.log(`revenue_intake_ledger_verify_ok rows=${items.items.length} source=${items.source}`);
 } finally {

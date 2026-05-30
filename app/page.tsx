@@ -1,6 +1,7 @@
 import {
   getOpportunityBundle,
   listEvidenceItems,
+  listOpenActionQueue,
   listOpportunities,
   listPayoutTasks,
   listStatusEvents
@@ -24,11 +25,12 @@ const jaStatusLabels = {
 };
 
 export default async function Page() {
-  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult, h0Bundle, health] = await Promise.all([
+  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult, actionQueue, h0Bundle, health] = await Promise.all([
     listOpportunities(),
     listEvidenceItems(),
     listPayoutTasks(),
     listStatusEvents(),
+    listOpenActionQueue(),
     getOpportunityBundle("h0"),
     Promise.resolve(getLedgerHealth())
   ]);
@@ -223,6 +225,35 @@ export default async function Page() {
                 {item.from} → {item.to}
               </p>
               <small>{item.reason}</small>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="action-index" aria-label="DynamoDB action queue">
+        <div>
+          <p className="eyebrow">AWS credit use · DynamoDB work queue</p>
+          <h2>Open follow-up tasks are stored as a queryable queue.</h2>
+          <p>
+            The extra AWS value is a real access pattern: the app reads only unfinished payout, result, and cost-monitoring
+            tasks through <code>PK = WORK_QUEUE#open</code>. This is the part that turns the ledger into an operating system after submit.
+          </p>
+          <div className="index-proof">
+            <span>access: {actionQueue.accessPath}</span>
+            <span>{actionQueue.keyCondition}</span>
+            <span>source: {actionQueue.source}</span>
+          </div>
+          <a className="api-link" href="/api/action-queue">Open /api/action-queue</a>
+        </div>
+        <div className="queue-list">
+          {actionQueue.items.map((item) => (
+            <article key={item.id}>
+              <span>{item.status}</span>
+              <strong>{item.label}</strong>
+              <p>{item.due}</p>
+              <small>
+                owner: {item.owner} · opportunity: {item.opportunityId}
+              </small>
             </article>
           ))}
         </div>

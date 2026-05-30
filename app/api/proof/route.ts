@@ -1,14 +1,21 @@
 import { NextResponse } from "next/server";
-import { listEvidenceItems, listOpportunities, listPayoutTasks, listStatusEvents } from "../../../lib/dynamodb";
+import {
+  listEvidenceItems,
+  listOpenActionQueue,
+  listOpportunities,
+  listPayoutTasks,
+  listStatusEvents
+} from "../../../lib/dynamodb";
 import { getLedgerHealth, h0ProofRequirements, summarizeLedgerItems } from "../../../lib/revenue-data";
 
 export async function GET() {
   const health = getLedgerHealth();
-  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult] = await Promise.all([
+  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult, actionQueueResult] = await Promise.all([
     listOpportunities(),
     listEvidenceItems(),
     listPayoutTasks(),
-    listStatusEvents()
+    listStatusEvents(),
+    listOpenActionQueue()
   ]);
 
   return NextResponse.json({
@@ -26,7 +33,13 @@ export async function GET() {
       opportunities: opportunityResult.source,
       evidence: evidenceResult.source,
       payoutTasks: payoutTaskResult.source,
-      statusEvents: statusEventResult.source
+      statusEvents: statusEventResult.source,
+      actionQueue: actionQueueResult.source
+    },
+    workQueueProof: {
+      accessPath: actionQueueResult.accessPath,
+      keyCondition: actionQueueResult.keyCondition,
+      openActions: actionQueueResult.items.length
     }
   });
 }

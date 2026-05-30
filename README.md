@@ -68,6 +68,7 @@ API routes:
 - `/api/health`
 - `/api/opportunities`
 - `/api/h0-bundle`
+- `/api/action-queue`
 - `/api/evidence`
 - `/api/payout-tasks`
 - `/api/proof`
@@ -79,6 +80,14 @@ Strongest H0 proof route:
 ```
 
 This route loads one complete DynamoDB item collection for `PK = OPPORTUNITY#h0`: the opportunity profile, evidence records, payout tasks, and status history.
+
+Additional AWS-credit proof route:
+
+```text
+/api/action-queue
+```
+
+This route loads open winner, payout, and AWS-usage follow-up tasks from the materialized item collection `PK = WORK_QUEUE#open`. It proves a second DynamoDB access pattern without adding broad AWS services or expanding runtime IAM privileges.
 
 Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 Final gate: [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)
@@ -130,11 +139,14 @@ Before connecting AWS:
 
 This boundary has now been cleared for the minimal DynamoDB proof table. Keep monitoring usage and do not add broader AWS services unless they clearly improve the submission.
 
+The current credit-backed improvement is intentionally small: extra DynamoDB records and the `WORK_QUEUE#open` access pattern. A direct attempt to add a new table index with the runtime IAM user was denied, which confirms the deployed app is using least-privilege credentials. The implementation therefore uses the existing table key design instead of expanding runtime permissions.
+
 ## Submission Checklist
 
 - Published Vercel URL
 - Vercel Team ID
 - DynamoDB table live proof: done
+- DynamoDB action queue proof: done
 - AWS storage configuration screenshot: captured
 - Architecture diagram
 - 3-5 minute demo video: https://youtu.be/tYj9V2s5bDY

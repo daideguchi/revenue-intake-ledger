@@ -91,12 +91,13 @@ h3 {
 }
 
 .db-card,
-.next-step,
-.table-wrap,
-.query-proof,
-.history-board,
-.architecture,
-.proof-board {
+  .next-step,
+  .table-wrap,
+  .query-proof,
+  .history-board,
+  .action-index,
+  .architecture,
+  .proof-board {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface);
@@ -367,7 +368,8 @@ dd {
 }
 
 .query-proof,
-.history-board {
+.history-board,
+.action-index {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   gap: 18px;
@@ -376,7 +378,8 @@ dd {
 }
 
 .query-main p,
-.history-board p {
+.history-board p,
+.action-index p {
   color: var(--muted);
   line-height: 1.5;
 }
@@ -398,6 +401,7 @@ code {
 }
 
 .query-counts span,
+.index-proof span,
 .api-link,
 .query-side a {
   border-radius: 999px;
@@ -412,6 +416,20 @@ code {
   color: var(--ok);
 }
 
+.index-proof {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.index-proof span {
+  width: fit-content;
+  max-width: 100%;
+  background: var(--brand-soft);
+  color: var(--brand);
+  overflow-wrap: anywhere;
+}
+
 .api-link,
 .query-side a {
   display: inline-flex;
@@ -420,13 +438,15 @@ code {
 }
 
 .query-side,
-.history-list {
+.history-list,
+.queue-list {
   display: grid;
   gap: 10px;
 }
 
 .query-side article,
-.history-list article {
+.history-list article,
+.queue-list article {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-soft);
@@ -434,7 +454,8 @@ code {
 }
 
 .query-side strong,
-.history-list strong {
+.history-list strong,
+.queue-list strong {
   display: block;
   margin-bottom: 8px;
 }
@@ -447,17 +468,21 @@ code {
 
 .query-side p,
 .history-list p,
-.history-list small {
+.history-list small,
+.queue-list p,
+.queue-list small {
   color: var(--muted);
   line-height: 1.42;
 }
 
 .query-side p,
-.history-list p {
+.history-list p,
+.queue-list p {
   margin-bottom: 10px;
 }
 
-.history-list span {
+.history-list span,
+.queue-list span {
   display: block;
   margin-bottom: 8px;
   color: var(--brand);
@@ -520,6 +545,7 @@ code {
   .workbench,
   .query-proof,
   .history-board,
+  .action-index,
   .architecture,
   .proof-board,
   .proof-grid,

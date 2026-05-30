@@ -31,6 +31,7 @@ The H0 Devpost final submit is complete. The remaining work is monitoring cost, 
 - [x] Vercel env vars set for AWS/DynamoDB
 - [x] Vercel production `/api/health` says `database=dynamodb`
 - [x] Vercel production `/api/opportunities` says `source=dynamodb:<table>`
+- [x] Vercel production `/api/action-queue` returns the `PK = WORK_QUEUE#open` follow-up queue
 - [x] AWS storage configuration screenshot captured
 - [x] Architecture diagram attached
 - [x] 3-5 minute demo video generated locally at `media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4`

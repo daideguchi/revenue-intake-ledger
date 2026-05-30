@@ -30,6 +30,16 @@ const items = [
     entity: "payout_task",
     ...item
   })),
+  ...seedPayoutTasks
+    .filter((item) => item.status !== "done")
+    .map((item) => ({
+      pk: "WORK_QUEUE#open",
+      sk: `DUE#${item.due}#OPPORTUNITY#${item.opportunityId}#PAYOUT#${item.id}`,
+      entity: "work_queue",
+      targetPk: `OPPORTUNITY#${item.opportunityId}`,
+      targetSk: `PAYOUT#${item.id}`,
+      ...item
+    })),
   ...seedStatusEvents.map((item) => ({
     pk: `OPPORTUNITY#${item.opportunityId}`,
     sk: `STATUS#${item.at}#${item.id}`,

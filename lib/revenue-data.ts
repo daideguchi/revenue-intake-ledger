@@ -82,7 +82,7 @@ export const seedOpportunities: RevenueOpportunity[] = [
     prizeRange: "$2,000-$10,000 cash plus AWS credits",
     evidenceUrl: "https://devpost.com/software/revenue-intake-ledger",
     evidenceCount: 6,
-    payoutTaskCount: 5,
+    payoutTaskCount: 6,
     risk: "Submitted and backed by DynamoDB, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
     aiSuggestion: "The final Devpost submission is complete. Keep the AWS table minimal, monitor Cost Explorer, and prepare winner/payout follow-up."
   },
@@ -254,6 +254,22 @@ export const seedPayoutTasks: PayoutTask[] = [
     label: "Final Devpost submit",
     status: "done",
     due: "Completed 2026-05-30 JST",
+    owner: "builder"
+  },
+  {
+    id: "h0-result-check",
+    opportunityId: "h0",
+    label: "Check H0 winner announcement and email",
+    status: "waiting",
+    due: "2026-08-01 06:00 JST",
+    owner: "organizer"
+  },
+  {
+    id: "h0-aws-usage-check",
+    opportunityId: "h0",
+    label: "Check AWS Cost Explorer for RevenueIntakeLedger usage",
+    status: "waiting",
+    due: "Weekly until H0 judging ends",
     owner: "builder"
   },
   {
@@ -435,6 +451,12 @@ export const dynamoAccessPatterns = [
     route: "/api/h0-bundle",
     keyShape: "PK = OPPORTUNITY#h0",
     why: "Loads one submission with its proof, payout tasks, and status history."
+  },
+  {
+    label: "Action queue",
+    route: "/api/action-queue",
+    keyShape: "PK = WORK_QUEUE#open",
+    why: "Reads only open result, payout, and cost-monitoring tasks through a materialized DynamoDB item collection."
   },
   {
     label: "Proof board",

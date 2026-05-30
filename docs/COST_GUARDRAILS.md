@@ -22,6 +22,7 @@ AWS billing credits view: active credit count 1, total balance $100.00, usage $0
 v0 credit redemption: pending
 Public app database: dynamodb
 Final H0 submission: submitted
+Current extra AWS usage: DynamoDB work-queue records only, no new broad AWS service
 ```
 
 ## Before Any AWS Resource Is Created
@@ -68,6 +69,22 @@ Point-in-time recovery: disabled by default
 
 PITR can be enabled with `EnablePointInTimeRecovery=true`, but do not do that for the H0 proof run.
 
+## Current AWS Credit Use
+
+The safe way to use the `$100` credit is not to burn it. It is to show a real database-backed operating pattern.
+
+Current additional proof:
+
+```text
+Extra records: open action queue items
+Access pattern: PK = WORK_QUEUE#open
+Public API: /api/action-queue
+Cost shape: tiny DynamoDB on-demand reads/writes and storage
+No extra server, no broad managed service, no PITR, no global table
+```
+
+The runtime IAM user was tested against a table-structure change and received `AccessDeniedException` for `dynamodb:UpdateTable`. Keep that boundary. The production app should not have admin-level database privileges.
+
 ## Approved Proof Flow
 
 This proof flow has been run for the minimal H0 table:
@@ -100,5 +117,5 @@ Do not provision more AWS services. Keep the current H0 submission on the existi
 The honest state is:
 
 ```text
-Submitted, AWS credit applied, Vercel production reads DynamoDB, monitor usage and result date.
+Submitted, AWS credit applied, Vercel production reads DynamoDB, work queue proof added, monitor usage and result date.
 ```
