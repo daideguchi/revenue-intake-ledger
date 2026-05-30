@@ -1,6 +1,6 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
-import { seedEvidenceItems, seedOpportunities, seedPayoutTasks } from "../lib/revenue-data.ts";
+import { seedEvidenceItems, seedOpportunities, seedPayoutTasks, seedStatusEvents } from "../lib/revenue-data.ts";
 
 const tableName = process.env.DYNAMODB_TABLE;
 const region = process.env.AWS_REGION || "us-east-1";
@@ -28,6 +28,12 @@ const items = [
     pk: `OPPORTUNITY#${item.opportunityId}`,
     sk: `PAYOUT#${item.id}`,
     entity: "payout_task",
+    ...item
+  })),
+  ...seedStatusEvents.map((item) => ({
+    pk: `OPPORTUNITY#${item.opportunityId}`,
+    sk: `STATUS#${item.at}#${item.id}`,
+    entity: "status_event",
     ...item
   }))
 ];

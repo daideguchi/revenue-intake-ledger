@@ -67,9 +67,18 @@ API routes:
 
 - `/api/health`
 - `/api/opportunities`
+- `/api/h0-bundle`
 - `/api/evidence`
 - `/api/payout-tasks`
 - `/api/proof`
+
+Strongest H0 proof route:
+
+```text
+/api/h0-bundle
+```
+
+This route loads one complete DynamoDB item collection for `PK = OPPORTUNITY#h0`: the opportunity profile, evidence records, payout tasks, and status history.
 
 Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 Final gate: [docs/SUBMISSION_CHECKLIST.md](docs/SUBMISSION_CHECKLIST.md)
@@ -101,7 +110,6 @@ AWS_REGION=us-east-1 DYNAMODB_TABLE=RevenueIntakeLedger npm run verify:dynamodb
 
 ## Cost Boundary
 
-AWS CLI is not installed on this Mac as of 2026-05-29 JST.
 The official H0 credits email arrived on 2026-05-30 JST with `$100` AWS Promotional Credits and `$30` v0 credits. The raw codes are intentionally not in this repository.
 
 Important expiration dates:
@@ -120,7 +128,7 @@ Before connecting AWS:
 - keep point-in-time recovery off for the proof table unless explicitly approved
 - capture screenshots only after the cost boundary is clear
 
-This boundary has now been cleared for the minimal DynamoDB proof table. Keep monitoring usage and do not add broader AWS services unless explicitly needed.
+This boundary has now been cleared for the minimal DynamoDB proof table. Keep monitoring usage and do not add broader AWS services unless they clearly improve the submission.
 
 ## Submission Checklist
 

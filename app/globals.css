@@ -93,6 +93,8 @@ h3 {
 .db-card,
 .next-step,
 .table-wrap,
+.query-proof,
+.history-board,
 .architecture,
 .proof-board {
   border: 1px solid var(--line);
@@ -364,6 +366,105 @@ dd {
   margin-top: 8px;
 }
 
+.query-proof,
+.history-board {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 18px;
+  margin-top: 24px;
+  padding: 22px;
+}
+
+.query-main p,
+.history-board p {
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+code {
+  padding: 2px 5px;
+  border-radius: 5px;
+  background: var(--surface-soft);
+  color: #23343c;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.88em;
+}
+
+.query-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0;
+}
+
+.query-counts span,
+.api-link,
+.query-side a {
+  border-radius: 999px;
+  padding: 8px 10px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.query-counts span {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.api-link,
+.query-side a {
+  display: inline-flex;
+  background: var(--brand);
+  color: white;
+}
+
+.query-side,
+.history-list {
+  display: grid;
+  gap: 10px;
+}
+
+.query-side article,
+.history-list article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-soft);
+  padding: 14px;
+}
+
+.query-side strong,
+.history-list strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.query-side code {
+  display: inline-block;
+  margin-bottom: 8px;
+  background: white;
+}
+
+.query-side p,
+.history-list p,
+.history-list small {
+  color: var(--muted);
+  line-height: 1.42;
+}
+
+.query-side p,
+.history-list p {
+  margin-bottom: 10px;
+}
+
+.history-list span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--brand);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
 .proof-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -417,6 +518,8 @@ dd {
   .judge-path,
   .metrics,
   .workbench,
+  .query-proof,
+  .history-board,
   .architecture,
   .proof-board,
   .proof-grid,

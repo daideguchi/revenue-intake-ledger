@@ -1,14 +1,32 @@
 import { NextResponse } from "next/server";
-import { getLedgerHealth, h0ProofRequirements, summarizeLedger } from "../../../lib/revenue-data";
+import { listEvidenceItems, listOpportunities, listPayoutTasks, listStatusEvents } from "../../../lib/dynamodb";
+import { getLedgerHealth, h0ProofRequirements, summarizeLedgerItems } from "../../../lib/revenue-data";
 
-export function GET() {
+export async function GET() {
   const health = getLedgerHealth();
+  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult] = await Promise.all([
+    listOpportunities(),
+    listEvidenceItems(),
+    listPayoutTasks(),
+    listStatusEvents()
+  ]);
 
   return NextResponse.json({
     ok: true,
     h0Ready: health.database === "dynamodb" && h0ProofRequirements.every((item) => item.status === "done"),
     health,
     requirements: h0ProofRequirements,
-    metrics: summarizeLedger()
+    metrics: summarizeLedgerItems(
+      opportunityResult.items,
+      evidenceResult.items,
+      payoutTaskResult.items,
+      statusEventResult.items
+    ),
+    sources: {
+      opportunities: opportunityResult.source,
+      evidence: evidenceResult.source,
+      payoutTasks: payoutTaskResult.source,
+      statusEvents: statusEventResult.source
+    }
   });
 }

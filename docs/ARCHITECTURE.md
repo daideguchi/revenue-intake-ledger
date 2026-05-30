@@ -10,6 +10,7 @@ Vercel / Next.js app
   |
   +-- /api/health
   +-- /api/opportunities
+  +-- /api/h0-bundle
   +-- /api/evidence
   +-- /api/payout-tasks
   +-- /api/proof
@@ -20,6 +21,7 @@ AWS DynamoDB
   +-- OPPORTUNITY#<id> / PROFILE
   +-- OPPORTUNITY#<id> / EVIDENCE#<id>
   +-- OPPORTUNITY#<id> / PAYOUT#<id>
+  +-- OPPORTUNITY#<id> / STATUS#<timestamp>#<id>
 ```
 
 ## Why DynamoDB
@@ -41,6 +43,15 @@ DynamoDB fits this because the app needs durable, small, event-like records rath
 | `OPPORTUNITY#h0` | `PROFILE` | `opportunity` | One revenue lane |
 | `OPPORTUNITY#h0` | `EVIDENCE#h0-dynamodb-proof` | `evidence` | A proof item |
 | `OPPORTUNITY#h0` | `PAYOUT#h0-submit` | `payout_task` | A follow-up task |
+| `OPPORTUNITY#h0` | `STATUS#2026-05-30...` | `status_event` | A money-relevant state change |
+
+## Query Patterns
+
+| Route | DynamoDB access pattern | Why it matters |
+|---|---|---|
+| `/api/opportunities` | Filter by `entity = opportunity` for the board view | Shows every revenue lane in one operating screen |
+| `/api/h0-bundle` | `Query` where `PK = OPPORTUNITY#h0` | Loads one complete submission packet: profile, proof, payout tasks, and status history |
+| `/api/proof` | Health plus live record counts | Proves whether the deployed app is reading DynamoDB or preview data |
 
 ## H0 Proof Boundary
 
@@ -53,5 +64,6 @@ Final proof requires:
 /api/opportunities -> source=dynamodb:<table>
 /api/evidence -> at least one live evidence row
 /api/payout-tasks -> at least one live payout task
+/api/h0-bundle -> one keyed item collection for the H0 lane
 AWS Console screenshot -> Storage Configuration / DynamoDB table
 ```

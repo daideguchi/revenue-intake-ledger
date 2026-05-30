@@ -24,7 +24,7 @@ const byEntity = items.reduce((acc, item) => {
   return acc;
 }, {});
 
-if (!byEntity.opportunity || !byEntity.evidence || !byEntity.payout_task) {
+if (!byEntity.opportunity || !byEntity.evidence || !byEntity.payout_task || !byEntity.status_event) {
   throw new Error(`DynamoDB proof incomplete: ${JSON.stringify(byEntity)}`);
 }
 

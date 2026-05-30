@@ -8,3 +8,4 @@ coverage/
 *.log
 media/tmp/
 .vercel
+.env*.local

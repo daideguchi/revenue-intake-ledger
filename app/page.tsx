@@ -1,5 +1,11 @@
-import { listOpportunities } from "../lib/dynamodb";
-import { getLedgerHealth, h0ProofRequirements, summarizeLedger } from "../lib/revenue-data";
+import {
+  getOpportunityBundle,
+  listEvidenceItems,
+  listOpportunities,
+  listPayoutTasks,
+  listStatusEvents
+} from "../lib/dynamodb";
+import { dynamoAccessPatterns, getLedgerHealth, h0ProofRequirements, summarizeLedgerItems } from "../lib/revenue-data";
 
 const statusLabels = {
   submitted: "Submitted",
@@ -18,9 +24,23 @@ const jaStatusLabels = {
 };
 
 export default async function Page() {
-  const [{ items, source }, health] = await Promise.all([listOpportunities(), Promise.resolve(getLedgerHealth())]);
-  const summary = summarizeLedger();
+  const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult, h0Bundle, health] = await Promise.all([
+    listOpportunities(),
+    listEvidenceItems(),
+    listPayoutTasks(),
+    listStatusEvents(),
+    getOpportunityBundle("h0"),
+    Promise.resolve(getLedgerHealth())
+  ]);
+  const { items, source } = opportunityResult;
+  const summary = summarizeLedgerItems(
+    items,
+    evidenceResult.items,
+    payoutTaskResult.items,
+    statusEventResult.items
+  );
   const nextItem = items.find((item) => item.status !== "submitted") || items[0];
+  const recentStatusEvents = statusEventResult.items.slice(0, 4);
 
   return (
     <main className="shell">
@@ -80,8 +100,12 @@ export default async function Page() {
           <p>evidence records</p>
         </article>
         <article>
-          <span>{summary.blockedTasks}</span>
-          <p>blocked tasks</p>
+          <span>{summary.payoutTasks}</span>
+          <p>payout tasks</p>
+        </article>
+        <article>
+          <span>{summary.statusEvents}</span>
+          <p>status events</p>
         </article>
       </section>
 
@@ -91,8 +115,8 @@ export default async function Page() {
           <h2>{nextItem.product}</h2>
           <p>{nextItem.nextAction}</p>
           <div className="hint">
-            <strong>Submission boundary</strong>
-            <span>H0 is not submitted until the Devpost final page shows Project submitted.</span>
+            <strong>Post-submit boundary</strong>
+            <span>H0 is submitted. Now the job is result monitoring, AWS usage monitoring, and payout paperwork readiness.</span>
           </div>
         </aside>
 
@@ -151,6 +175,56 @@ export default async function Page() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="query-proof" aria-label="DynamoDB query proof">
+        <div className="query-main">
+          <p className="eyebrow">Single-table query proof</p>
+          <h2>One key loads the whole H0 revenue packet.</h2>
+          <p>
+            The H0 lane is stored as one DynamoDB item collection. The app can load the submission profile, proof
+            records, payout tasks, and status history with the access pattern <code>PK = OPPORTUNITY#h0</code>.
+          </p>
+          <div className="query-counts">
+            <span>{h0Bundle.evidence.length} evidence</span>
+            <span>{h0Bundle.payoutTasks.length} payout tasks</span>
+            <span>{h0Bundle.statusEvents.length} status events</span>
+          </div>
+          <a className="api-link" href="/api/h0-bundle">Open /api/h0-bundle</a>
+        </div>
+        <div className="query-side">
+          {dynamoAccessPatterns.map((item) => (
+            <article key={item.route}>
+              <strong>{item.label}</strong>
+              <code>{item.keyShape}</code>
+              <p>{item.why}</p>
+              <a href={item.route}>{item.route}</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="history-board" aria-label="Status history">
+        <div>
+          <p className="eyebrow">Status history</p>
+          <h2>Every money-relevant change leaves a trace.</h2>
+          <p>
+            This is the practical point of the product: after a project is submitted, humans and AI both need a clean
+            record of what changed, why it changed, and what should happen next.
+          </p>
+        </div>
+        <div className="history-list">
+          {recentStatusEvents.map((item) => (
+            <article key={item.id}>
+              <span>{item.at}</span>
+              <strong>{item.label}</strong>
+              <p>
+                {item.from} → {item.to}
+              </p>
+              <small>{item.reason}</small>
+            </article>
+          ))}
         </div>
       </section>
 

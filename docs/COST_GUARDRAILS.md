@@ -13,15 +13,15 @@ Do not create AWS resources if real charges could land on DD.
 ## Current State
 
 ```text
-AWS CLI on this Mac: not installed as of 2026-05-29 JST
-AWS credentials in this shell: not present
+AWS CLI on this Mac: not installed in the current shell check on 2026-05-31 JST
+AWS credentials in this shell: do not assume present; verify through safe scripts before any AWS write
 H0 AWS/v0 credit email: received on 2026-05-30 JST
 Raw credit codes: stored only in ignored local secrets file
 AWS credit redemption: applied and visible in AWS Billing
 AWS billing credits view: active credit count 1, total balance $100.00, usage $0.00 as of 2026-05-30 JST
 v0 credit redemption: pending
 Public app database: dynamodb
-Final H0 submission: not ready until demo and Devpost final submit are complete
+Final H0 submission: submitted
 ```
 
 ## Before Any AWS Resource Is Created
@@ -95,10 +95,10 @@ Do not mark cleanup as complete until AWS confirms the stack is gone.
 
 ## If Zero-Cost Proof Cannot Be Guaranteed
 
-Do not provision more AWS services. Do not submit H0 as a completed project until the demo and Devpost finalization are complete.
+Do not provision more AWS services. Keep the current H0 submission on the existing DynamoDB proof path unless the new service clearly improves the judge story.
 
 The honest state is:
 
 ```text
-Registered, AWS credit applied, Vercel production reads DynamoDB, demo/final Devpost submit still pending.
+Submitted, AWS credit applied, Vercel production reads DynamoDB, monitor usage and result date.
 ```

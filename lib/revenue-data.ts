@@ -43,6 +43,17 @@ export type PayoutTask = {
   owner: "builder" | "organizer" | "sponsor";
 };
 
+export type StatusEvent = {
+  id: string;
+  opportunityId: string;
+  at: string;
+  actor: "builder" | "ai" | "organizer" | "sponsor";
+  label: string;
+  from: string;
+  to: string;
+  reason: string;
+};
+
 export type ProofRequirement = {
   label: string;
   status: "done" | "waiting" | "blocked";
@@ -255,6 +266,59 @@ export const seedPayoutTasks: PayoutTask[] = [
   }
 ];
 
+export const seedStatusEvents: StatusEvent[] = [
+  {
+    id: "h0-registered",
+    opportunityId: "h0",
+    at: "2026-05-29 07:57 JST",
+    actor: "builder",
+    label: "Registered for H0",
+    from: "not joined",
+    to: "registered",
+    reason: "The Devpost registration state changed from Join hackathon to Start project."
+  },
+  {
+    id: "h0-credit-applied",
+    opportunityId: "h0",
+    at: "2026-05-30 JST",
+    actor: "builder",
+    label: "AWS credit applied",
+    from: "credit pending",
+    to: "credit visible",
+    reason: "AWS Billing showed the promotional credit before any database proof work continued."
+  },
+  {
+    id: "h0-dynamodb-live",
+    opportunityId: "h0",
+    at: "2026-05-30 JST",
+    actor: "builder",
+    label: "DynamoDB became source of truth",
+    from: "preview-seed",
+    to: "dynamodb",
+    reason: "The Vercel production app read opportunities, evidence, and payout tasks from the RevenueIntakeLedger table."
+  },
+  {
+    id: "h0-final-submitted",
+    opportunityId: "h0",
+    at: "2026-05-30 05:55 JST",
+    actor: "builder",
+    label: "Final Devpost submission",
+    from: "ready",
+    to: "submitted",
+    reason: "The final H0 Devpost page showed Project submitted and 5/5 steps done."
+  },
+  {
+    id: "coexistence-submitted",
+    opportunityId: "coexistence",
+    at: "2026-05-20 JST",
+    actor: "builder",
+    label: "Reddit mod tool submitted",
+    from: "review",
+    to: "submitted",
+    reason: "The Devvit app, multilingual UI, AI policy drafting, queue, log, and analytics story were locked for review."
+  }
+];
+
 export const h0ProofRequirements: ProofRequirement[] = [
   {
     label: "Devpost registration",
@@ -335,3 +399,47 @@ export function summarizeLedger() {
     blockedTasks
   };
 }
+
+export function summarizeLedgerItems(
+  opportunities: RevenueOpportunity[],
+  evidenceItems: EvidenceItem[],
+  payoutTasks: PayoutTask[],
+  statusEvents: StatusEvent[]
+) {
+  const submitted = opportunities.filter((item) => item.status === "submitted").length;
+  const open = opportunities.length - submitted;
+  const missingEvidence = evidenceItems.filter((item) => item.status !== "attached").length;
+  const blockedTasks = payoutTasks.filter((item) => item.status === "blocked").length;
+
+  return {
+    opportunities: opportunities.length,
+    submitted,
+    open,
+    evidenceItems: evidenceItems.length,
+    missingEvidence,
+    payoutTasks: payoutTasks.length,
+    blockedTasks,
+    statusEvents: statusEvents.length
+  };
+}
+
+export const dynamoAccessPatterns = [
+  {
+    label: "Board view",
+    route: "/api/opportunities",
+    keyShape: "entity = opportunity",
+    why: "Builds the operating board from durable revenue lanes."
+  },
+  {
+    label: "One lane packet",
+    route: "/api/h0-bundle",
+    keyShape: "PK = OPPORTUNITY#h0",
+    why: "Loads one submission with its proof, payout tasks, and status history."
+  },
+  {
+    label: "Proof board",
+    route: "/api/proof",
+    keyShape: "health + live counts",
+    why: "Shows whether the deployed app is using DynamoDB or only preview data."
+  }
+];
