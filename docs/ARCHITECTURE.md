@@ -2,6 +2,8 @@
 
 Revenue Intake Ledger is intentionally database-first.
 
+The product starts from an agent-era problem: AI agents make it easier to launch many products, submissions, videos, stores, and experiments, but the after-launch work becomes scattered. A builder still needs proof, deadlines, payout tasks, cloud cost checks, and human approvals in one place.
+
 ```text
 Judge / builder
   |
@@ -36,7 +38,7 @@ The product is a live operations ledger. Items are created over time and belong 
 - sponsor follow-ups
 - AI suggestions
 
-DynamoDB fits this because the app needs durable, small, event-like records rather than heavy relational reporting.
+DynamoDB fits this because the app needs durable, small, event-like records rather than heavy relational reporting. It becomes shared memory for humans and agents after the first launch.
 
 ## Single Table Shape
 

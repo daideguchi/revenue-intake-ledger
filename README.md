@@ -6,6 +6,10 @@ H0 build lane for **Hack the Zero Stack with Vercel v0 and AWS Databases**.
 
 Revenue Intake Ledger helps small AI builders and SaaS teams manage revenue opportunities after the exciting part of shipping is over.
 
+As AI agents become normal, builders will be able to launch more apps, videos, submissions, stores, and experiments than one person can neatly track. The new bottleneck is not only creation. It is the cleanup after creation: proof, deadlines, payout tasks, cost checks, and human approvals.
+
+Revenue Intake Ledger is built for that next problem.
+
 It tracks:
 
 - what has actually been submitted
@@ -18,7 +22,8 @@ It tracks:
 Japanese:
 
 ```text
-小さなAIチームが、応募・証拠・賞金条件・入金予定を一つの画面で追える収益管理ツールです。
+AIエージェントで事業や応募が増えるほど、作った後の整理、証拠、締切、入金確認、人間の承認が重くなります。
+Revenue Intake Ledger は、その後工程を一つの画面で追える収益管理ツールです。
 ```
 
 ## H0 Status
@@ -53,6 +58,8 @@ This project uses the database as the product memory:
 - payout tasks
 - status history
 - AI suggestions
+
+In the agent era, the database is the memory that keeps humans and agents aligned after the first launch.
 
 Current preview mode uses bundled seed data. Production mode switches to DynamoDB when these environment variables are set:
 

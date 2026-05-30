@@ -74,8 +74,8 @@ export const seedOpportunities: RevenueOpportunity[] = [
     program: "H0: Hack the Zero Stack",
     status: "submitted",
     plainStatus: "Submitted to H0 Devpost",
-    audience: "Small AI builders and SaaS teams",
-    problem: "They track submissions, evidence, prize terms, and payout tasks across too many places.",
+    audience: "Solo builders and small teams using AI agents to launch many revenue experiments",
+    problem: "AI makes creation faster, but proof, cost checks, deadlines, payout tasks, and approvals scatter after launch.",
     nextAction: "Monitor the H0 result date, AWS usage, and any payout paperwork from organizers.",
     awardDate: "2026-07-31 14:00 PDT",
     payoutEstimate: "If selected, after required forms are verified; plan for up to 60 days.",
@@ -84,7 +84,7 @@ export const seedOpportunities: RevenueOpportunity[] = [
     evidenceCount: 6,
     payoutTaskCount: 6,
     risk: "Submitted and backed by DynamoDB, but AWS promotional credits are still not a hard spending cap; keep usage tiny and monitored.",
-    aiSuggestion: "The final Devpost submission is complete. Keep the AWS table minimal, monitor Cost Explorer, and prepare winner/payout follow-up."
+    aiSuggestion: "The final Devpost submission is complete. Keep the AWS table minimal, monitor Cost Explorer, and use the ledger as shared memory between humans and agents."
   },
   {
     id: "coexistence",

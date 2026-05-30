@@ -51,11 +51,12 @@ export default async function Page() {
           <p className="eyebrow">H0 Build Lane · Vercel + AWS Databases</p>
           <h1>Revenue Intake Ledger</h1>
           <p className="lead">
-            Small AI teams win or lose money in the follow-up work after shipping. This ledger turns submissions,
-            evidence, prize terms, and payout tasks into one durable revenue room.
+            AI agents make it easy to launch more products, submissions, videos, stores, and experiments. The hard
+            part becomes the cleanup after creation: proof, deadlines, cost checks, payout tasks, and human approvals.
           </p>
           <p className="lead ja">
-            小さなAIチームが、応募・証拠・賞金条件・入金予定を一つの画面で追える収益管理ツールです。
+            AIエージェントで事業や応募が増えるほど、作った後の整理、証拠、締切、入金確認、人間の承認が重くなります。
+            この台帳は、その後工程を一つの画面で追える収益管理ツールです。
           </p>
         </div>
         <div className={`db-card ${health.database === "dynamodb" ? "live" : "preview"}`}>
@@ -69,12 +70,12 @@ export default async function Page() {
         <div>
           <span>1</span>
           <strong>Who</strong>
-          <p>AI builders chasing many revenue opportunities at once.</p>
+          <p>Builders using AI agents to launch many revenue experiments at once.</p>
         </div>
         <div>
           <span>2</span>
           <strong>Pain</strong>
-          <p>Submitted, blocked, winner dates, and payout tasks become scattered.</p>
+          <p>Creation gets faster, but proof, cost checks, deadlines, and payout tasks scatter.</p>
         </div>
         <div>
           <span>3</span>
@@ -265,7 +266,7 @@ export default async function Page() {
           <h2>The database is the product memory.</h2>
           <p>
             DynamoDB stores opportunities, evidence items, prize terms, payout tasks, status history, and AI suggestions.
-            The current production app is connected to DynamoDB, and the proof board keeps final submission claims honest.
+            In an agent-heavy workflow, this shared memory keeps humans and AI aligned after the first launch.
           </p>
         </div>
         <ul>

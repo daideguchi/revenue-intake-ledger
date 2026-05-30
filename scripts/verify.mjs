@@ -62,7 +62,7 @@ try {
     throw new Error("proof work queue access pattern missing");
   }
   if (!html.includes("Revenue Intake Ledger")) throw new Error("landing dashboard missing title");
-  if (!html.includes("小さなAIチーム")) throw new Error("Japanese guidance missing");
+  if (!html.includes("AIエージェントで事業や応募が増える")) throw new Error("Japanese guidance missing");
   if (!html.includes("DynamoDB")) throw new Error("database boundary missing");
   if (!html.includes("Single-table query proof")) throw new Error("single-table query proof missing");
   if (!html.includes("OPPORTUNITY#h0")) throw new Error("DynamoDB key proof missing");
