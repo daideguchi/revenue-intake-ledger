@@ -86,7 +86,7 @@ a {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
   gap: 12px;
-  align-items: stretch;
+  align-items: start;
 }
 
 .eyebrow {
@@ -133,8 +133,21 @@ h3 {
   line-height: 1.42;
 }
 
-.lead.ja {
-  color: #324047;
+.proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.proof-strip span {
+  border: 1px solid #8bc7a5;
+  border-radius: 999px;
+  background: var(--ok-soft);
+  color: var(--ok);
+  padding: 6px 9px;
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .db-card,
@@ -152,7 +165,7 @@ h3 {
 
 .db-card {
   position: relative;
-  padding: 14px;
+  padding: 12px;
 }
 
 .db-card strong {
@@ -164,8 +177,8 @@ h3 {
 .db-card p {
   margin-bottom: 0;
   color: var(--muted);
-  line-height: 1.38;
-  font-size: 0.92rem;
+  line-height: 1.34;
+  font-size: 0.9rem;
 }
 
 .db-card.preview {

@@ -69,9 +69,15 @@ const copy = {
     title: "Don’t lose the work after you build with AI.",
     lead:
       "A small checklist board for solo builders. It keeps proof links, result dates, cloud-cost checks, and payment forms in one place.",
-    dbLive: "DynamoDB connected",
+    facts: {
+      submitted: "Submitted on Devpost",
+      liveDb: "Live DynamoDB",
+      previewDb: "Preview data",
+      openTask: "Open task query"
+    },
+    dbLive: "Live DynamoDB proof",
     dbPreview: "Preview data",
-    dbLiveBoundary: "Live DynamoDB is configured. API routes use AWS as the source of truth.",
+    dbLiveBoundary: "This app is reading the live AWS database used for the H0 submission.",
     dbPreviewBoundary: "Preview mode is using bundled seed data. Do not submit until DynamoDB is proven.",
     judge: [
       ["Who", "Solo builders who use AI to launch many small products."],
@@ -82,8 +88,8 @@ const copy = {
     nextCheck: "Next check",
     why: "Why it matters",
     whyText: "The board turns “I’ll check that later” into one clear next step.",
-    checklist: "Project checklist",
-    whatNext: "What to check next",
+    checklist: "Tracked projects",
+    whatNext: "Submitted projects and follow-ups",
     source: "source",
     fields: ["Problem", "Next step", "Result date", "Prize range"],
     evidence: "evidence",
@@ -126,9 +132,15 @@ const copy = {
     title: "AIで作った後の作業を、見失わない。",
     lead:
       "一人でAIを使ってたくさん作る人のための、小さな確認ボードです。証拠リンク、結果発表日、クラウド費用、入金手続きを一か所にまとめます。",
-    dbLive: "DynamoDB 接続済み",
+    facts: {
+      submitted: "Devpost提出済み",
+      liveDb: "DynamoDB本番接続",
+      previewDb: "プレビュー表示",
+      openTask: "未完了タスク取得"
+    },
+    dbLive: "DynamoDB証拠あり",
     dbPreview: "プレビュー用データ",
-    dbLiveBoundary: "本番の DynamoDB が設定されています。API は AWS の保存データを読んでいます。",
+    dbLiveBoundary: "H0提出用の本番AWSデータベースを読んでいます。",
     dbPreviewBoundary: "今は同梱データで表示しています。DynamoDB の証拠が確認できるまで提出判断には使いません。",
     judge: [
       ["誰のため", "AIで小さなプロダクトをたくさん作る、一人開発者のため。"],
@@ -139,8 +151,8 @@ const copy = {
     nextCheck: "次に確認",
     why: "なぜ大事か",
     whyText: "「あとで確認する」を、今見るべき一つの行動に変えます。",
-    checklist: "作品チェックリスト",
-    whatNext: "次に何を見るか",
+    checklist: "追跡中の作品",
+    whatNext: "提出済み作品と次の確認",
     source: "データ元",
     fields: ["困りごと", "次の一手", "発表日", "賞金範囲"],
     evidence: "証拠",
@@ -339,22 +351,43 @@ function localizeProof(item: ProofRequirement, lang: Lang) {
   return lang === "ja" ? { ...item, ...proofJa[item.label] } : item;
 }
 
+function sortOpportunities(items: RevenueOpportunity[]) {
+  const statusRank: Record<OpportunityStatus, number> = {
+    submitted: 2,
+    watching: 1,
+    registered: 1,
+    proof_needed: 1,
+    blocked: 3
+  };
+
+  return [...items].sort((a, b) => {
+    if (a.id === "h0") return -1;
+    if (b.id === "h0") return 1;
+    return statusRank[a.status] - statusRank[b.status] || a.awardDate.localeCompare(b.awardDate);
+  });
+}
+
 type ViewProps = {
   lang: Lang;
   items: RevenueOpportunity[];
   source: string;
   summary: ReturnType<typeof summarizeLedgerItems>;
-  nextItem: RevenueOpportunity;
+  nextTask: PayoutTask | null;
   health: ReturnType<typeof getLedgerHealth>;
   h0Bundle: Awaited<ReturnType<typeof getOpportunityBundle>>;
   actionQueue: Awaited<ReturnType<typeof listOpenActionQueue>>;
   recentStatusEvents: StatusEvent[];
 };
 
-function LocalizedView({ lang, items, source, summary, nextItem, health, h0Bundle, actionQueue, recentStatusEvents }: ViewProps) {
+function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundle, actionQueue, recentStatusEvents }: ViewProps) {
   const t = copy[lang];
-  const localizedItems = items.map((item) => localizeOpportunity(item, lang));
-  const localizedNextItem = localizeOpportunity(nextItem, lang);
+  const localizedItems = sortOpportunities(items).map((item) => localizeOpportunity(item, lang));
+  const localizedNextTask = nextTask ? localizePayoutTask(nextTask, lang) : null;
+  const proofFacts = [
+    t.facts.submitted,
+    health.database === "dynamodb" ? t.facts.liveDb : t.facts.previewDb,
+    t.facts.openTask
+  ];
 
   return (
     <div className={`lang-panel ${lang}-panel`} lang={lang}>
@@ -363,6 +396,11 @@ function LocalizedView({ lang, items, source, summary, nextItem, health, h0Bundl
           <p className="eyebrow">{t.eyebrow}</p>
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
+          <div className="proof-strip" aria-label={lang === "ja" ? "提出証拠の要点" : "Submission proof highlights"}>
+            {proofFacts.map((fact) => (
+              <span key={fact}>{fact}</span>
+            ))}
+          </div>
         </div>
         <div className={`db-card ${health.database === "dynamodb" ? "live" : "preview"}`}>
           <span className="pulse" />
@@ -393,8 +431,14 @@ function LocalizedView({ lang, items, source, summary, nextItem, health, h0Bundl
       <section className="workbench">
         <aside className="next-step" aria-label={lang === "ja" ? "次の行動" : "Next action"}>
           <p className="eyebrow">{t.nextCheck}</p>
-          <h2>{localizedNextItem.product}</h2>
-          <p>{localizedNextItem.nextAction}</p>
+          <h2>{localizedNextTask?.label || t.whatNext}</h2>
+          {localizedNextTask ? (
+            <p>
+              {localizedNextTask.due} · {t.owner}: {ownerLabels[lang][localizedNextTask.owner]}
+            </p>
+          ) : (
+            <p>{t.whyText}</p>
+          )}
           <div className="hint">
             <strong>{t.why}</strong>
             <span>{t.whyText}</span>
@@ -583,7 +627,7 @@ export default async function Page() {
     payoutTaskResult.items,
     statusEventResult.items
   );
-  const nextItem = items.find((item) => item.status !== "submitted") || items[0];
+  const nextTask = actionQueue.items[0] || null;
   const recentStatusEvents = statusEventResult.items.slice(0, 4);
 
   return (
@@ -599,7 +643,7 @@ export default async function Page() {
         items={items}
         source={source}
         summary={summary}
-        nextItem={nextItem}
+        nextTask={nextTask}
         health={health}
         h0Bundle={h0Bundle}
         actionQueue={actionQueue}
@@ -610,7 +654,7 @@ export default async function Page() {
         items={items}
         source={source}
         summary={summary}
-        nextItem={nextItem}
+        nextTask={nextTask}
         health={health}
         h0Bundle={h0Bundle}
         actionQueue={actionQueue}
