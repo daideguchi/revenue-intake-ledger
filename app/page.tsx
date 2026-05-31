@@ -16,14 +16,6 @@ const statusLabels = {
   proof_needed: "Proof needed"
 };
 
-const jaStatusLabels = {
-  submitted: "提出済み",
-  watching: "確認中",
-  registered: "登録済み",
-  blocked: "停止中",
-  proof_needed: "証拠待ち"
-};
-
 export default async function Page() {
   const [opportunityResult, evidenceResult, payoutTaskResult, statusEventResult, actionQueue, h0Bundle, health] = await Promise.all([
     listOpportunities(),
@@ -143,36 +135,36 @@ export default async function Page() {
                 </div>
                 <dl>
                   <div>
-                    <dt>誰のため</dt>
+                    <dt>Who it helps</dt>
                     <dd>{item.audience}</dd>
                   </div>
                   <div>
-                    <dt>困りごと</dt>
+                    <dt>Problem</dt>
                     <dd>{item.problem}</dd>
                   </div>
                   <div>
-                    <dt>次の一手</dt>
+                    <dt>Next step</dt>
                     <dd>{item.nextAction}</dd>
                   </div>
                   <div>
-                    <dt>発表</dt>
+                    <dt>Result date</dt>
                     <dd>{item.awardDate}</dd>
                   </div>
                   <div>
-                    <dt>賞金幅</dt>
+                    <dt>Prize range</dt>
                     <dd>{item.prizeRange}</dd>
                   </div>
                   <div>
-                    <dt>AI提案</dt>
+                    <dt>AI note</dt>
                     <dd>{item.aiSuggestion}</dd>
                   </div>
                   <div>
-                    <dt>リスク</dt>
+                    <dt>Risk</dt>
                     <dd>{item.risk}</dd>
                   </div>
                 </dl>
                 <footer>
-                  <span>{jaStatusLabels[item.status]}</span>
+                  <span>{statusLabels[item.status]}</span>
                   <a href={item.evidenceUrl}>evidence</a>
                 </footer>
               </article>

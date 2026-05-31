@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Revenue Intake Ledger",
-  description: "A production-backed revenue operations room for AI builders."
+  description: "A DynamoDB-backed follow-up board for AI builders after they ship."
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
