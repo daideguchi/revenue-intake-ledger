@@ -62,8 +62,11 @@ try {
     throw new Error("proof work queue access pattern missing");
   }
   if (!html.includes("Revenue Intake Ledger")) throw new Error("landing dashboard missing title");
-  if (!html.includes("AIでたくさん作った後に")) throw new Error("Japanese guidance missing");
+  if (!html.includes("AIで作った後の")) throw new Error("Japanese guidance missing");
   if (!html.includes("DynamoDB")) throw new Error("database boundary missing");
+  if (!html.includes("Who</strong>")) throw new Error("who card missing");
+  if (!html.includes("Problem</strong>")) throw new Error("problem card missing");
+  if (!html.includes("Solution</strong>")) throw new Error("solution card missing");
   if (!html.includes("DynamoDB proof")) throw new Error("DynamoDB proof section missing");
   if (!html.includes("OPPORTUNITY#h0")) throw new Error("DynamoDB key proof missing");
   if (!html.includes("Unfinished work queue")) throw new Error("unfinished work queue section missing");

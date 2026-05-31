@@ -41,14 +41,13 @@ export default async function Page() {
       <section className="topbar" aria-label="Product status">
         <div>
           <p className="eyebrow">Revenue Intake Ledger · H0 Build Lane</p>
-          <h1>The follow-up board for AI builders after they ship.</h1>
+          <h1>A simple board for the work after AI helps you ship.</h1>
           <p className="lead">
-            AI can help one person launch many apps, videos, stores, and hackathon submissions. Then the messy part
-            starts: proof, winner dates, cloud costs, forms, and payment follow-up get scattered.
+            For solo AI builders who launch many projects at once. It tracks proof links, result dates, cloud-cost
+            checks, and payment forms so the follow-up work does not get lost.
           </p>
           <p className="lead ja">
-            AIでたくさん作った後に、証拠、締切、費用、入金確認を忘れないための管理ボードです。
-            「作る」より後の仕事を、1つの画面で追えるようにします。
+            AIで作った後の「証拠・締切・費用・入金確認」を忘れないための管理ボードです。
           </p>
         </div>
         <div className={`db-card ${health.database === "dynamodb" ? "live" : "preview"}`}>
@@ -61,23 +60,18 @@ export default async function Page() {
       <section className="judge-path" aria-label="30 second judge path">
         <div>
           <span>1</span>
-          <strong>Who is it for?</strong>
-          <p>Solo builders using AI to run many projects, submissions, or revenue tests at once.</p>
+          <strong>Who</strong>
+          <p>Solo AI builders submitting many apps, tools, videos, or experiments.</p>
         </div>
         <div>
           <span>2</span>
-          <strong>What hurts?</strong>
-          <p>After launch, proof links, result dates, cloud costs, and payment forms get lost.</p>
+          <strong>Problem</strong>
+          <p>After launch, proof, result dates, cloud costs, and payment forms scatter.</p>
         </div>
         <div>
           <span>3</span>
-          <strong>How it helps</strong>
-          <p>It keeps every project status, proof item, deadline, and next step in DynamoDB.</p>
-        </div>
-        <div>
-          <span>4</span>
-          <strong>Why AWS DB?</strong>
-          <p>The database is the shared memory that humans and AI agents can both use.</p>
+          <strong>Solution</strong>
+          <p>One DynamoDB-backed board keeps each project, proof item, deadline, and next step together.</p>
         </div>
       </section>
 

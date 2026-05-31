@@ -149,7 +149,7 @@ h3 {
 
 .judge-path {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin: 24px 0;
 }
@@ -163,7 +163,7 @@ h3 {
 }
 
 .judge-path div {
-  min-height: 132px;
+  min-height: 118px;
   padding: 16px;
 }
 
