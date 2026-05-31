@@ -12,6 +12,8 @@ Their problem: after launch, proof links, result dates, cloud-cost checks, and p
 
 The solution: one board keeps each project, proof link, deadline, and next step together.
 
+The public UI has a top-right language switch. English and Japanese are separated into two full UI panels, so reviewers can read the app in either language without mixed helper text.
+
 Plain explanation:
 
 ```text

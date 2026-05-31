@@ -36,6 +36,52 @@ a {
   padding: 16px 0 32px;
 }
 
+.language-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.language-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.language-bar label {
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  padding: 7px 12px;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+#lang-en:checked ~ .language-bar label[for="lang-en"],
+#lang-ja:checked ~ .language-bar label[for="lang-ja"] {
+  border-color: var(--brand);
+  background: var(--brand);
+  color: white;
+}
+
+.lang-panel {
+  display: none;
+}
+
+#lang-en:checked ~ .en-panel,
+#lang-ja:checked ~ .ja-panel {
+  display: block;
+}
+
+.ja-panel {
+  font-family: "Hiragino Sans", "Yu Gothic", "YuGothic", Meiryo, Arial, sans-serif;
+}
+
 .topbar {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);

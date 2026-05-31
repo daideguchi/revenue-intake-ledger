@@ -62,8 +62,12 @@ try {
     throw new Error("proof work queue access pattern missing");
   }
   if (!html.includes("Revenue Intake Ledger")) throw new Error("landing dashboard missing title");
+  if (!html.includes('id="lang-en"') || !html.includes('id="lang-ja"')) {
+    throw new Error("language switch missing");
+  }
   if (!html.includes("Don’t lose the work after you build with AI.")) throw new Error("gentle headline missing");
-  if (!html.includes("AIで作った後の")) throw new Error("Japanese guidance missing");
+  if (!html.includes("AIで作った後の作業を、見失わない。")) throw new Error("Japanese headline missing");
+  if (!html.includes("困りごと") || !html.includes("未完了タスク")) throw new Error("Japanese UI surface missing");
   if (!html.includes("DynamoDB")) throw new Error("database boundary missing");
   if (!html.includes("Who</strong>")) throw new Error("who card missing");
   if (!html.includes("Problem</strong>")) throw new Error("problem card missing");
