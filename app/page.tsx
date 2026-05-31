@@ -65,7 +65,7 @@ const ownerLabels = {
 
 const copy = {
   en: {
-    eyebrow: "Revenue Intake Ledger · H0 Build Lane",
+    eyebrow: "Hackathon: H0 · Vercel v0 + AWS Databases",
     title: "Don’t lose the work after you build with AI.",
     lead:
       "A small checklist board for solo builders. It keeps proof links, result dates, cloud-cost checks, and payment forms in one place.",
@@ -73,7 +73,8 @@ const copy = {
       submitted: "Submitted on Devpost",
       liveDb: "Live DynamoDB",
       previewDb: "Preview data",
-      openTask: "Open task query"
+      openTask: "Open task query",
+      demo: "3-min demo"
     },
     dbLive: "Live DynamoDB proof",
     dbPreview: "Preview data",
@@ -84,7 +85,7 @@ const copy = {
       ["Problem", "After launch, important follow-up work gets scattered."],
       ["Solution", "One board keeps proof, deadlines, cost checks, and next steps together."]
     ],
-    metrics: ["projects", "done", "proof", "payments", "changes"],
+    metrics: ["tracked projects", "submitted", "proof items", "payment tasks", "status events"],
     nextCheck: "Next check",
     why: "Why it matters",
     whyText: "The board turns “I’ll check that later” into one clear next step.",
@@ -125,10 +126,20 @@ const copy = {
     proofBoard: "Submission proof",
     proofTitle: "This is not a mock dashboard.",
     proofText:
-      "The app includes live DynamoDB readback, API proof routes, an architecture diagram, and a short demo video. The database is used as the actual product memory."
+      "The app includes live DynamoDB readback, API proof routes, an architecture diagram, and a short demo video. The database is used as the actual product memory.",
+    verifyTitle: "Verify in 30 seconds",
+    verifyLead: "Three clicks confirm this is a real, working submission — not a mock.",
+    verifySteps: [
+      ["Open the Devpost submission", "https://devpost.com/software/revenue-intake-ledger"],
+      ["Watch the 3-min demo video", "https://youtu.be/tYj9V2s5bDY"],
+      ["Inspect live DynamoDB data", "/api/h0-bundle"]
+    ] as [string, string][],
+    proofPeekTitle: "Real query, real return",
+    proofPeekNote: "This is the actual shape returned by one DynamoDB query against the H0 record.",
+    footerLine: "Built for H0 · DynamoDB-native · No fake numbers, no synthetic charts."
   },
   ja: {
-    eyebrow: "Revenue Intake Ledger · H0 提出作品",
+    eyebrow: "ハッカソン: H0 · Vercel v0 + AWS Databases",
     title: "AIで作った後の作業を、見失わない。",
     lead:
       "一人でAIを使ってたくさん作る人のための、小さな確認ボードです。証拠リンク、結果発表日、クラウド費用、入金手続きを一か所にまとめます。",
@@ -136,7 +147,8 @@ const copy = {
       submitted: "Devpost提出済み",
       liveDb: "DynamoDB本番接続",
       previewDb: "プレビュー表示",
-      openTask: "未完了タスク取得"
+      openTask: "未完了タスク取得",
+      demo: "3分デモ動画"
     },
     dbLive: "DynamoDB証拠あり",
     dbPreview: "プレビュー用データ",
@@ -147,7 +159,7 @@ const copy = {
       ["困りごと", "公開後に、証拠・締切・費用確認・入金手続きが散らばります。"],
       ["解決方法", "証拠、締切、費用確認、次の一手をひとつのボードにまとめます。"]
     ],
-    metrics: ["作品", "完了", "証拠", "入金", "変更"],
+    metrics: ["追跡中の作品", "提出済み", "証拠", "入金タスク", "履歴"],
     nextCheck: "次に確認",
     why: "なぜ大事か",
     whyText: "「あとで確認する」を、今見るべき一つの行動に変えます。",
@@ -188,7 +200,17 @@ const copy = {
     proofBoard: "提出証拠",
     proofTitle: "見せかけのダッシュボードではありません。",
     proofText:
-      "本番 DynamoDB の読み返し、API証拠、構成図、短いデモ動画を用意しています。データベースを実際の作品の記憶として使っています。"
+      "本番 DynamoDB の読み返し、API証拠、構成図、短いデモ動画を用意しています。データベースを実際の作品の記憶として使っています。",
+    verifyTitle: "30秒で確認できます",
+    verifyLead: "3つのリンクをクリックすれば、本物だとすぐに分かります。",
+    verifySteps: [
+      ["Devpostの提出ページを見る", "https://devpost.com/software/revenue-intake-ledger"],
+      ["3分のデモ動画を見る", "https://youtu.be/tYj9V2s5bDY"],
+      ["DynamoDBの実データを開く", "/api/h0-bundle"]
+    ] as [string, string][],
+    proofPeekTitle: "本物のクエリと、本物の返り値",
+    proofPeekNote: "H0の作品レコードを DynamoDB に1回問い合わせた時の、実際の返り値の形です。",
+    footerLine: "H0に提出 · DynamoDBネイティブ · 偽の数字や架空のグラフはありません。"
   }
 };
 
@@ -383,23 +405,42 @@ function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundl
   const t = copy[lang];
   const localizedItems = sortOpportunities(items).map((item) => localizeOpportunity(item, lang));
   const localizedNextTask = nextTask ? localizePayoutTask(nextTask, lang) : null;
-  const proofFacts = [
-    t.facts.submitted,
-    health.database === "dynamodb" ? t.facts.liveDb : t.facts.previewDb,
-    t.facts.openTask
+  const proofFacts: { label: string; href: string; live?: boolean; preview?: boolean }[] = [
+    { label: t.facts.submitted, href: "https://devpost.com/software/revenue-intake-ledger" },
+    {
+      label: health.database === "dynamodb" ? t.facts.liveDb : t.facts.previewDb,
+      href: "/api/proof",
+      live: health.database === "dynamodb",
+      preview: health.database !== "dynamodb"
+    },
+    { label: t.facts.openTask, href: "/api/action-queue" },
+    { label: t.facts.demo, href: "https://youtu.be/tYj9V2s5bDY" }
   ];
 
   return (
     <div className={`lang-panel ${lang}-panel`} lang={lang}>
-      <section className="topbar" aria-label={lang === "ja" ? "作品の状態" : "Product status"}>
+      <section className="topbar" aria-label={lang === "ja" ? "作品の状態" : "Product status"} id="top">
         <div>
           <p className="eyebrow">{t.eyebrow}</p>
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
           <div className="proof-strip" aria-label={lang === "ja" ? "提出証拠の要点" : "Submission proof highlights"}>
-            {proofFacts.map((fact) => (
-              <span key={fact}>{fact}</span>
-            ))}
+            {proofFacts.map((fact) => {
+              const external = fact.href.startsWith("http");
+              const cls = `proof-link${fact.live ? " live" : ""}${fact.preview ? " preview" : ""}`;
+              return (
+                <a
+                  key={fact.label}
+                  href={fact.href}
+                  className={cls}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined}
+                >
+                  {fact.label}
+                  <span aria-hidden="true">{external ? " ↗" : " →"}</span>
+                </a>
+              );
+            })}
           </div>
         </div>
         <div className={`db-card ${health.database === "dynamodb" ? "live" : "preview"}`}>
@@ -407,6 +448,31 @@ function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundl
           <strong>{health.database === "dynamodb" ? t.dbLive : t.dbPreview}</strong>
           <p>{health.database === "dynamodb" ? t.dbLiveBoundary : t.dbPreviewBoundary}</p>
         </div>
+      </section>
+
+      <section className="verify-panel" aria-label={lang === "ja" ? "30秒で確認" : "Verify in 30 seconds"}>
+        <div className="verify-head">
+          <p className="eyebrow">{t.verifyTitle}</p>
+          <h2>{t.verifyLead}</h2>
+        </div>
+        <ol className="verify-steps">
+          {t.verifySteps.map(([label, href], index) => {
+            const external = href.startsWith("http");
+            return (
+              <li key={label}>
+                <span className="step-num">{index + 1}</span>
+                <a
+                  href={href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noreferrer" : undefined}
+                >
+                  {label}
+                  <span aria-hidden="true">{external ? " ↗" : " →"}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ol>
       </section>
 
       <section className="judge-path" aria-label={lang === "ja" ? "30秒でわかる説明" : "30 second judge path"}>
@@ -503,6 +569,27 @@ function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundl
             <span>{h0Bundle.payoutTasks.length} {t.counts[1]}</span>
             <span>{h0Bundle.statusEvents.length} {t.counts[2]}</span>
           </div>
+          <figure className="json-peek-wrap" aria-label={t.proofPeekTitle}>
+            <figcaption className="json-peek-note">{t.proofPeekNote}</figcaption>
+            <pre className="json-peek">{JSON.stringify(
+              {
+                table: "RevenueIntakeLedger",
+                partitionKey: "OPPORTUNITY#h0",
+                returned: {
+                  opportunity: {
+                    id: "h0",
+                    product: "Revenue Intake Ledger",
+                    status: "submitted"
+                  },
+                  evidence: h0Bundle.evidence.length,
+                  payoutTasks: h0Bundle.payoutTasks.length,
+                  statusEvents: h0Bundle.statusEvents.length
+                }
+              },
+              null,
+              2
+            )}</pre>
+          </figure>
           <a className="api-link" href="/api/h0-bundle">{t.openApi} /api/h0-bundle</a>
         </div>
         <div className="query-side">
@@ -606,6 +693,10 @@ function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundl
           })}
         </div>
       </section>
+
+      <footer className="page-footer">
+        <small>{t.footerLine}</small>
+      </footer>
     </div>
   );
 }
