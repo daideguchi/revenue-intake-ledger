@@ -37,6 +37,23 @@ Japanese:
 AIで作った後の「証拠・締切・費用・入金確認」を忘れないための管理ボードです。
 ```
 
+## 30-Second Judge Path
+
+The first screen is built so a reviewer can verify the product quickly:
+
+1. Open the Devpost submission.
+2. Watch the 3-minute demo video.
+3. Inspect live DynamoDB data through `/api/h0-bundle`.
+
+The hero proof links also expose `/api/proof` and `/api/action-queue`, so reviewers can confirm that the app is not just a static mockup.
+
+Japanese:
+
+```text
+30秒で、Devpost提出・3分デモ・DynamoDB実データを確認できます。
+画面右上の切り替えで、日本語だけのUIとして読めます。
+```
+
 ## H0 Status
 
 ```text
@@ -44,7 +61,7 @@ Devpost registration: done
 AWS/v0 credit request: approved
 AWS credit redemption: applied and visible in AWS Billing
 v0 credit redemption: optional / not used for this final submission
-Vercel preview: https://revenue-intake-ledger-public.vercel.app/
+Public app: https://revenue-intake-ledger-public.vercel.app/
 GitHub: https://github.com/daideguchi/revenue-intake-ledger
 Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Devpost submission: https://devpost.com/software/revenue-intake-ledger
@@ -72,7 +89,7 @@ This project uses the database as the product memory:
 
 In the agent era, the database is the memory that keeps humans and agents aligned after the first launch.
 
-Current preview mode uses bundled seed data. Production mode switches to DynamoDB when these environment variables are set:
+Local preview mode uses bundled seed data. Production is currently connected to DynamoDB. The app switches to DynamoDB when these environment variables are set:
 
 ```text
 AWS_REGION
@@ -98,6 +115,14 @@ Strongest H0 proof route:
 ```
 
 This route loads one complete DynamoDB item collection for `PK = OPPORTUNITY#h0`: the opportunity profile, evidence records, payout tasks, and status history.
+
+The public page also shows a small JSON peek in the DynamoDB proof section. It displays the real access pattern and count shape without exposing secrets:
+
+```text
+table: RevenueIntakeLedger
+partitionKey: OPPORTUNITY#h0
+returns: opportunity profile, evidence, payout tasks, status history
+```
 
 Additional AWS-credit proof route:
 
