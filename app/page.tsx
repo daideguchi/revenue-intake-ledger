@@ -48,15 +48,15 @@ export default async function Page() {
     <main className="shell">
       <section className="topbar" aria-label="Product status">
         <div>
-          <p className="eyebrow">H0 Build Lane · Vercel + AWS Databases</p>
-          <h1>Revenue Intake Ledger</h1>
+          <p className="eyebrow">Revenue Intake Ledger · H0 Build Lane</p>
+          <h1>The follow-up board for AI builders after they ship.</h1>
           <p className="lead">
-            AI agents make it easy to launch more products, submissions, videos, stores, and experiments. The hard
-            part becomes the cleanup after creation: proof, deadlines, cost checks, payout tasks, and human approvals.
+            AI can help one person launch many apps, videos, stores, and hackathon submissions. Then the messy part
+            starts: proof, winner dates, cloud costs, forms, and payment follow-up get scattered.
           </p>
           <p className="lead ja">
-            AIエージェントで事業や応募が増えるほど、作った後の整理、証拠、締切、入金確認、人間の承認が重くなります。
-            この台帳は、その後工程を一つの画面で追える収益管理ツールです。
+            AIでたくさん作った後に、証拠、締切、費用、入金確認を忘れないための管理ボードです。
+            「作る」より後の仕事を、1つの画面で追えるようにします。
           </p>
         </div>
         <div className={`db-card ${health.database === "dynamodb" ? "live" : "preview"}`}>
@@ -69,65 +69,65 @@ export default async function Page() {
       <section className="judge-path" aria-label="30 second judge path">
         <div>
           <span>1</span>
-          <strong>Who</strong>
-          <p>Builders using AI agents to launch many revenue experiments at once.</p>
+          <strong>Who is it for?</strong>
+          <p>Solo builders using AI to run many projects, submissions, or revenue tests at once.</p>
         </div>
         <div>
           <span>2</span>
-          <strong>Pain</strong>
-          <p>Creation gets faster, but proof, cost checks, deadlines, and payout tasks scatter.</p>
+          <strong>What hurts?</strong>
+          <p>After launch, proof links, result dates, cloud costs, and payment forms get lost.</p>
         </div>
         <div>
           <span>3</span>
-          <strong>How</strong>
-          <p>A database-backed ledger stores every status, proof item, and next action.</p>
+          <strong>How it helps</strong>
+          <p>It keeps every project status, proof item, deadline, and next step in DynamoDB.</p>
         </div>
         <div>
           <span>4</span>
-          <strong>Why H0</strong>
-          <p>The database is the product memory, not a decorative backend.</p>
+          <strong>Why AWS DB?</strong>
+          <p>The database is the shared memory that humans and AI agents can both use.</p>
         </div>
       </section>
 
       <section className="metrics" aria-label="Current operating metrics">
         <article>
           <span>{summary.opportunities}</span>
-          <p>tracked opportunities</p>
+          <p>projects tracked</p>
         </article>
         <article>
           <span>{summary.submitted}</span>
-          <p>submitted lanes</p>
+          <p>submitted projects</p>
         </article>
         <article>
           <span>{summary.evidenceItems}</span>
-          <p>evidence records</p>
+          <p>proof items</p>
         </article>
         <article>
           <span>{summary.payoutTasks}</span>
-          <p>payout tasks</p>
+          <p>payment tasks</p>
         </article>
         <article>
           <span>{summary.statusEvents}</span>
-          <p>status events</p>
+          <p>change log entries</p>
         </article>
       </section>
 
       <section className="workbench">
         <aside className="next-step" aria-label="Next action">
-          <p className="eyebrow">Next best action</p>
+          <p className="eyebrow">What needs attention now</p>
           <h2>{nextItem.product}</h2>
           <p>{nextItem.nextAction}</p>
           <div className="hint">
-            <strong>Post-submit boundary</strong>
-            <span>H0 is submitted. Now the job is result monitoring, AWS usage monitoring, and payout paperwork readiness.</span>
+            <strong>Plain English</strong>
+            <span>The project is submitted. Now the board reminds the builder what must be checked next.</span>
           </div>
         </aside>
 
         <div className="table-wrap">
           <div className="table-head">
             <div>
-              <p className="eyebrow">Operating ledger</p>
-              <h2>Revenue lanes</h2>
+              <p className="eyebrow">Follow-up board</p>
+              <h2>Projects that still need attention</h2>
             </div>
             <span>source: {source}</span>
           </div>
@@ -183,11 +183,11 @@ export default async function Page() {
 
       <section className="query-proof" aria-label="DynamoDB query proof">
         <div className="query-main">
-          <p className="eyebrow">Single-table query proof</p>
-          <h2>One key loads the whole H0 revenue packet.</h2>
+          <p className="eyebrow">DynamoDB proof</p>
+          <h2>One key loads everything needed for one project.</h2>
           <p>
-            The H0 lane is stored as one DynamoDB item collection. The app can load the submission profile, proof
-            records, payout tasks, and status history with the access pattern <code>PK = OPPORTUNITY#h0</code>.
+            The H0 project is stored as one DynamoDB item collection. The app loads the project profile, proof links,
+            payment tasks, and status history with <code>PK = OPPORTUNITY#h0</code>.
           </p>
           <div className="query-counts">
             <span>{h0Bundle.evidence.length} evidence</span>
@@ -210,11 +210,11 @@ export default async function Page() {
 
       <section className="history-board" aria-label="Status history">
         <div>
-          <p className="eyebrow">Status history</p>
-          <h2>Every money-relevant change leaves a trace.</h2>
+          <p className="eyebrow">Change history</p>
+          <h2>Every important change leaves a trace.</h2>
           <p>
-            This is the practical point of the product: after a project is submitted, humans and AI both need a clean
-            record of what changed, why it changed, and what should happen next.
+            After a project is submitted, humans and AI agents both need a clean record of what changed, why it changed,
+            and what should happen next.
           </p>
         </div>
         <div className="history-list">
@@ -233,11 +233,11 @@ export default async function Page() {
 
       <section className="action-index" aria-label="DynamoDB action queue">
         <div>
-          <p className="eyebrow">AWS credit use · DynamoDB work queue</p>
-          <h2>Open follow-up tasks are stored as a queryable queue.</h2>
+          <p className="eyebrow">Unfinished work queue</p>
+          <h2>The app can ask DynamoDB: what is still open?</h2>
           <p>
-            The extra AWS value is a real access pattern: the app reads only unfinished payout, result, and cost-monitoring
-            tasks through <code>PK = WORK_QUEUE#open</code>. This is the part that turns the ledger into an operating system after submit.
+            The app reads unfinished result, payment, and cloud-cost tasks through <code>PK = WORK_QUEUE#open</code>.
+            This is what turns the board into a working checklist instead of a static dashboard.
           </p>
           <div className="index-proof">
             <span>access: {actionQueue.accessPath}</span>
@@ -263,27 +263,27 @@ export default async function Page() {
       <section className="architecture" aria-label="Database architecture">
         <div>
           <p className="eyebrow">Database-first design</p>
-          <h2>The database is the product memory.</h2>
+          <h2>DynamoDB is the memory for the work.</h2>
           <p>
-            DynamoDB stores opportunities, evidence items, prize terms, payout tasks, status history, and AI suggestions.
-            In an agent-heavy workflow, this shared memory keeps humans and AI aligned after the first launch.
+            DynamoDB stores projects, proof items, prize terms, payment tasks, change history, and AI suggestions.
+            In an agent-heavy workflow, this shared memory keeps humans and AI aligned after launch.
           </p>
         </div>
         <ul>
-          <li>opportunities: product, program, target prize, current state</li>
-          <li>evidence_items: proof files, public URLs, verification notes</li>
-          <li>status_history: who changed what and why</li>
-          <li>payout_tasks: forms, deadlines, expected receipt windows</li>
+          <li>projects: product, program, target prize, current state</li>
+          <li>proof items: files, public URLs, verification notes</li>
+          <li>change history: who changed what and why</li>
+          <li>payment tasks: forms, deadlines, expected receipt windows</li>
         </ul>
       </section>
 
       <section className="proof-board" aria-label="H0 proof checklist">
         <div>
-          <p className="eyebrow">H0 proof board</p>
-          <h2>Ready means the database is real.</h2>
+          <p className="eyebrow">Submission proof</p>
+          <h2>This is not a mock dashboard.</h2>
           <p>
-            This board keeps the current preview honest. A public URL alone is not enough for H0. The final package
-            needs live DynamoDB proof, storage screenshots, a diagram, and a short demo.
+            The app includes live DynamoDB readback, API proof routes, an architecture diagram, and a short demo video.
+            The database is used as the actual product memory.
           </p>
         </div>
         <div className="proof-grid">
