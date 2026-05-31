@@ -4,20 +4,20 @@ H0 build lane for **Hack the Zero Stack with Vercel v0 and AWS Databases**.
 
 ## What It Does
 
-Revenue Intake Ledger is a simple board for the work after AI helps you ship.
+Revenue Intake Ledger is a simple checklist board for the work after you build with AI.
 
-It is for solo AI builders who launch many projects at once.
+It is for solo builders who use AI to launch many projects at once.
 
-Their problem: after launch, proof links, result dates, cloud-cost checks, and payment forms scatter across tabs, emails, dashboards, and notes.
+Their problem: after launch, proof links, result dates, cloud-cost checks, and payment forms get scattered.
 
-The solution: one DynamoDB-backed board keeps each project, proof item, deadline, and next step together.
+The solution: one board keeps each project, proof link, deadline, and next step together.
 
 Plain explanation:
 
 ```text
-Who: solo AI builders shipping many projects.
-Problem: after launch, proof, result dates, costs, and payment forms get lost.
-Solution: one DynamoDB-backed board keeps the follow-up work together.
+Who: solo builders using AI to launch many small products.
+Problem: after launch, important follow-up work gets scattered.
+Solution: one board keeps proof, deadlines, cost checks, and next steps together.
 ```
 
 It tracks:

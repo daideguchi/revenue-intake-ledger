@@ -9,11 +9,11 @@ import {
 import { dynamoAccessPatterns, getLedgerHealth, h0ProofRequirements, summarizeLedgerItems } from "../lib/revenue-data";
 
 const statusLabels = {
-  submitted: "Submitted",
-  watching: "Watching",
-  registered: "Registered",
+  submitted: "Done",
+  watching: "Watch",
+  registered: "Ready",
   blocked: "Blocked",
-  proof_needed: "Proof needed"
+  proof_needed: "Need proof"
 };
 
 export default async function Page() {
@@ -41,10 +41,10 @@ export default async function Page() {
       <section className="topbar" aria-label="Product status">
         <div>
           <p className="eyebrow">Revenue Intake Ledger · H0 Build Lane</p>
-          <h1>A simple board for the work after AI helps you ship.</h1>
+          <h1>Don’t lose the work after you build with AI.</h1>
           <p className="lead">
-            For solo AI builders who launch many projects at once. It tracks proof links, result dates, cloud-cost
-            checks, and payment forms so the follow-up work does not get lost.
+            A small checklist board for solo builders. It keeps proof links, result dates, cloud-cost checks, and
+            payment forms in one place.
           </p>
           <p className="lead ja">
             AIで作った後の「証拠・締切・費用・入金確認」を忘れないための管理ボードです。
@@ -61,59 +61,59 @@ export default async function Page() {
         <div>
           <span>1</span>
           <strong>Who</strong>
-          <p>Solo AI builders submitting many apps, tools, videos, or experiments.</p>
+          <p>Solo builders who use AI to launch many small products.</p>
         </div>
         <div>
           <span>2</span>
           <strong>Problem</strong>
-          <p>After launch, proof, result dates, cloud costs, and payment forms scatter.</p>
+          <p>After launch, important follow-up work gets scattered.</p>
         </div>
         <div>
           <span>3</span>
           <strong>Solution</strong>
-          <p>One DynamoDB-backed board keeps each project, proof item, deadline, and next step together.</p>
+          <p>One board keeps proof, deadlines, cost checks, and next steps together.</p>
         </div>
       </section>
 
       <section className="metrics" aria-label="Current operating metrics">
         <article>
           <span>{summary.opportunities}</span>
-          <p>projects tracked</p>
+          <p>projects</p>
         </article>
         <article>
           <span>{summary.submitted}</span>
-          <p>submitted projects</p>
+          <p>done</p>
         </article>
         <article>
           <span>{summary.evidenceItems}</span>
-          <p>proof items</p>
+          <p>proof</p>
         </article>
         <article>
           <span>{summary.payoutTasks}</span>
-          <p>payment tasks</p>
+          <p>payments</p>
         </article>
         <article>
           <span>{summary.statusEvents}</span>
-          <p>change log entries</p>
+          <p>changes</p>
         </article>
       </section>
 
       <section className="workbench">
         <aside className="next-step" aria-label="Next action">
-          <p className="eyebrow">What needs attention now</p>
+          <p className="eyebrow">Next check</p>
           <h2>{nextItem.product}</h2>
           <p>{nextItem.nextAction}</p>
           <div className="hint">
-            <strong>Plain English</strong>
-            <span>The project is submitted. Now the board reminds the builder what must be checked next.</span>
+            <strong>Why it matters</strong>
+            <span>The board turns “I’ll check that later” into one clear next step.</span>
           </div>
         </aside>
 
         <div className="table-wrap">
           <div className="table-head">
             <div>
-              <p className="eyebrow">Follow-up board</p>
-              <h2>Projects that still need attention</h2>
+              <p className="eyebrow">Project checklist</p>
+              <h2>What to check next</h2>
             </div>
             <span>source: {source}</span>
           </div>
@@ -128,10 +128,6 @@ export default async function Page() {
                   <span>{statusLabels[item.status]}</span>
                 </div>
                 <dl>
-                  <div>
-                    <dt>Who it helps</dt>
-                    <dd>{item.audience}</dd>
-                  </div>
                   <div>
                     <dt>Problem</dt>
                     <dd>{item.problem}</dd>
@@ -148,14 +144,6 @@ export default async function Page() {
                     <dt>Prize range</dt>
                     <dd>{item.prizeRange}</dd>
                   </div>
-                  <div>
-                    <dt>AI note</dt>
-                    <dd>{item.aiSuggestion}</dd>
-                  </div>
-                  <div>
-                    <dt>Risk</dt>
-                    <dd>{item.risk}</dd>
-                  </div>
                 </dl>
                 <footer>
                   <span>{statusLabels[item.status]}</span>
@@ -169,11 +157,11 @@ export default async function Page() {
 
       <section className="query-proof" aria-label="DynamoDB query proof">
         <div className="query-main">
-          <p className="eyebrow">DynamoDB proof</p>
-          <h2>One key loads everything needed for one project.</h2>
+          <p className="eyebrow">Database proof</p>
+          <h2>The board reads real saved records.</h2>
           <p>
-            The H0 project is stored as one DynamoDB item collection. The app loads the project profile, proof links,
-            payment tasks, and status history with <code>PK = OPPORTUNITY#h0</code>.
+            For H0, the project is stored in DynamoDB. One query loads the project, proof links, payment tasks,
+            and status history with <code>PK = OPPORTUNITY#h0</code>.
           </p>
           <div className="query-counts">
             <span>{h0Bundle.evidence.length} evidence</span>
@@ -197,10 +185,10 @@ export default async function Page() {
       <section className="history-board" aria-label="Status history">
         <div>
           <p className="eyebrow">Change history</p>
-          <h2>Every important change leaves a trace.</h2>
+          <h2>Every important change is saved.</h2>
           <p>
-            After a project is submitted, humans and AI agents both need a clean record of what changed, why it changed,
-            and what should happen next.
+            After submission, humans and AI agents both need a simple record of what changed, why it changed,
+            and what to do next.
           </p>
         </div>
         <div className="history-list">
@@ -219,11 +207,11 @@ export default async function Page() {
 
       <section className="action-index" aria-label="DynamoDB action queue">
         <div>
-          <p className="eyebrow">Unfinished work queue</p>
-          <h2>The app can ask DynamoDB: what is still open?</h2>
+          <p className="eyebrow">Open tasks</p>
+          <h2>The board can ask: what is still open?</h2>
           <p>
             The app reads unfinished result, payment, and cloud-cost tasks through <code>PK = WORK_QUEUE#open</code>.
-            This is what turns the board into a working checklist instead of a static dashboard.
+            That makes it a working checklist, not a static page.
           </p>
           <div className="index-proof">
             <span>access: {actionQueue.accessPath}</span>
@@ -248,11 +236,11 @@ export default async function Page() {
 
       <section className="architecture" aria-label="Database architecture">
         <div>
-          <p className="eyebrow">Database-first design</p>
-          <h2>DynamoDB is the memory for the work.</h2>
+          <p className="eyebrow">Shared memory</p>
+          <h2>DynamoDB keeps the work in one place.</h2>
           <p>
             DynamoDB stores projects, proof items, prize terms, payment tasks, change history, and AI suggestions.
-            In an agent-heavy workflow, this shared memory keeps humans and AI aligned after launch.
+            In an AI-heavy workflow, this keeps humans and agents looking at the same truth.
           </p>
         </div>
         <ul>

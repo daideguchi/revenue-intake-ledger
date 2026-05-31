@@ -62,14 +62,15 @@ try {
     throw new Error("proof work queue access pattern missing");
   }
   if (!html.includes("Revenue Intake Ledger")) throw new Error("landing dashboard missing title");
+  if (!html.includes("Don’t lose the work after you build with AI.")) throw new Error("gentle headline missing");
   if (!html.includes("AIで作った後の")) throw new Error("Japanese guidance missing");
   if (!html.includes("DynamoDB")) throw new Error("database boundary missing");
   if (!html.includes("Who</strong>")) throw new Error("who card missing");
   if (!html.includes("Problem</strong>")) throw new Error("problem card missing");
   if (!html.includes("Solution</strong>")) throw new Error("solution card missing");
-  if (!html.includes("DynamoDB proof")) throw new Error("DynamoDB proof section missing");
+  if (!html.includes("Database proof")) throw new Error("database proof section missing");
   if (!html.includes("OPPORTUNITY#h0")) throw new Error("DynamoDB key proof missing");
-  if (!html.includes("Unfinished work queue")) throw new Error("unfinished work queue section missing");
+  if (!html.includes("Open tasks")) throw new Error("open tasks section missing");
   if (!html.includes("PK = WORK_QUEUE#open")) throw new Error("work queue proof missing");
 
   console.log(`revenue_intake_ledger_verify_ok rows=${items.items.length} source=${items.source}`);
