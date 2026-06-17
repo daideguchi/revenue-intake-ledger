@@ -68,6 +68,7 @@ Devpost submission: https://devpost.com/software/revenue-intake-ledger
 Product submission: submitted
 AWS DB proof: connected and verified
 Demo video: https://youtu.be/tYj9V2s5bDY
+H0 build note: https://revenue-intake-ledger-public.vercel.app/h0-build-note
 Cost policy: no out-of-pocket spend allowed
 ```
 

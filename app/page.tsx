@@ -132,7 +132,8 @@ const copy = {
     verifySteps: [
       ["Open the Devpost submission", "https://devpost.com/software/revenue-intake-ledger"],
       ["Watch the 3-min demo video", "https://youtu.be/tYj9V2s5bDY"],
-      ["Inspect live DynamoDB data", "/api/h0-bundle"]
+      ["Inspect live DynamoDB data", "/api/h0-bundle"],
+      ["Read the #H0Hackathon build note", "/h0-build-note"]
     ] as [string, string][],
     proofPeekTitle: "Real query, real return",
     proofPeekNote: "This is the actual shape returned by one DynamoDB query against the H0 record.",
@@ -206,7 +207,8 @@ const copy = {
     verifySteps: [
       ["Devpostの提出ページを見る", "https://devpost.com/software/revenue-intake-ledger"],
       ["3分のデモ動画を見る", "https://youtu.be/tYj9V2s5bDY"],
-      ["DynamoDBの実データを開く", "/api/h0-bundle"]
+      ["DynamoDBの実データを開く", "/api/h0-bundle"],
+      ["#H0Hackathonの制作記事を読む", "/h0-build-note"]
     ] as [string, string][],
     proofPeekTitle: "本物のクエリと、本物の返り値",
     proofPeekNote: "H0の作品レコードを DynamoDB に1回問い合わせた時の、実際の返り値の形です。",
