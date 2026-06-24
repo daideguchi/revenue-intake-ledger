@@ -74,7 +74,7 @@ const copy = {
       liveDb: "Live DynamoDB",
       previewDb: "Preview data",
       openTask: "Open task query",
-      demo: "3-min demo"
+      demo: "under-3-min functioning demo"
     },
     dbLive: "Live DynamoDB proof",
     dbPreview: "Preview data",
