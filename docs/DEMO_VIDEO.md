@@ -5,13 +5,13 @@ The H0 demo video is generated locally so the narration, proof screenshots, and 
 ## Build
 
 ```bash
-npm run demo:video
+npm run demo:functioning
 ```
 
 Output:
 
 ```text
-media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4
+media/tmp/h0-functioning-demo/revenue-intake-ledger-h0-functioning-demo.mp4
 ```
 
 The generated video is intentionally ignored by Git through `media/tmp/`.
@@ -19,7 +19,7 @@ The generated video is intentionally ignored by Git through `media/tmp/`.
 Current uploaded demo:
 
 ```text
-https://youtu.be/tYj9V2s5bDY
+https://youtu.be/sGeT3OtkBks
 ```
 
 ## Current Public Proof Path
@@ -28,7 +28,7 @@ After the final UI polish, the app's first viewport now gives reviewers a direct
 
 - `Verify in 30 seconds` / `30秒で確認できます`
 - Devpost submission link
-- 3-minute demo video link
+- Under-3-minute functioning demo video link
 - `/api/h0-bundle` live DynamoDB bundle
 - `/api/proof` readiness check
 - `/api/action-queue` open follow-up task query
@@ -41,7 +41,7 @@ The narration uses the macOS English voice `Samantha` so the English demo is not
 
 ## Submission Boundary
 
-This boundary has been cleared for H0. The demo video is uploaded and the Devpost final submit succeeded.
+This boundary has been cleared for H0. The updated functioning demo video is uploaded and should be used for the Devpost final submission update.
 
 Post-submit checks:
 

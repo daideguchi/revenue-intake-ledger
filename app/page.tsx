@@ -131,7 +131,7 @@ const copy = {
     verifyLead: "Three clicks confirm this is a real, working submission — not a mock.",
     verifySteps: [
       ["Open the Devpost submission", "https://devpost.com/software/revenue-intake-ledger"],
-      ["Watch the 3-min demo video", "https://youtu.be/tYj9V2s5bDY"],
+      ["Watch the under-3-min functioning demo video", "https://youtu.be/sGeT3OtkBks"],
       ["Inspect live DynamoDB data", "/api/h0-bundle"],
       ["Read the #H0Hackathon build note", "/h0-build-note"]
     ] as [string, string][],
@@ -149,7 +149,7 @@ const copy = {
       liveDb: "DynamoDB本番接続",
       previewDb: "プレビュー表示",
       openTask: "未完了タスク取得",
-      demo: "3分デモ動画"
+      demo: "3分未満の動作デモ"
     },
     dbLive: "DynamoDB証拠あり",
     dbPreview: "プレビュー用データ",
@@ -206,7 +206,7 @@ const copy = {
     verifyLead: "3つのリンクをクリックすれば、本物だとすぐに分かります。",
     verifySteps: [
       ["Devpostの提出ページを見る", "https://devpost.com/software/revenue-intake-ledger"],
-      ["3分のデモ動画を見る", "https://youtu.be/tYj9V2s5bDY"],
+      ["3分未満の動作デモを見る", "https://youtu.be/sGeT3OtkBks"],
       ["DynamoDBの実データを開く", "/api/h0-bundle"],
       ["#H0Hackathonの制作記事を読む", "/h0-build-note"]
     ] as [string, string][],
@@ -349,9 +349,9 @@ const proofJa: Record<string, Pick<ProofRequirement, "label" | "note">> = {
     label: "AWS保存証拠",
     note: "RevenueIntakeLedger テーブルのAWS Consoleスクリーンショットを、機密を隠して保存済みです。"
   },
-  "3-5 minute demo video": {
-    label: "3〜5分デモ動画",
-    note: "更新済みの英語ナレーションデモをYouTubeに限定公開しています: https://youtu.be/tYj9V2s5bDY"
+  "Under-3-minute functioning demo video": {
+    label: "3分未満の動作デモ",
+    note: "本番Vercel画面、DynamoDB API、未完了タスク取得を見せるデモをPETOPIA AIに限定公開しています: https://youtu.be/sGeT3OtkBks"
   },
   "Devpost final submitted state": {
     label: "Devpost最終提出",
@@ -416,7 +416,7 @@ function LocalizedView({ lang, items, source, summary, nextTask, health, h0Bundl
       preview: health.database !== "dynamodb"
     },
     { label: t.facts.openTask, href: "/api/action-queue" },
-    { label: t.facts.demo, href: "https://youtu.be/tYj9V2s5bDY" }
+    { label: t.facts.demo, href: "https://youtu.be/sGeT3OtkBks" }
   ];
 
   return (

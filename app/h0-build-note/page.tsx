@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 const proofLinks = [
   ["Live app", "/"],
   ["Devpost submission", "https://devpost.com/software/revenue-intake-ledger"],
-  ["Demo video", "https://youtu.be/tYj9V2s5bDY"],
+  ["Demo video", "https://youtu.be/sGeT3OtkBks"],
   ["DynamoDB bundle", "/api/h0-bundle"],
   ["Proof route", "/api/proof"]
 ];

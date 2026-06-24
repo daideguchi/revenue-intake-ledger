@@ -34,8 +34,8 @@ The H0 Devpost final submit is complete. The remaining work is monitoring cost, 
 - [x] Vercel production `/api/action-queue` returns the `PK = WORK_QUEUE#open` follow-up queue
 - [x] AWS storage configuration screenshot captured
 - [x] Architecture diagram attached
-- [x] 3-5 minute demo video generated locally at `media/tmp/h0-demo/revenue-intake-ledger-h0-demo.mp4`
-- [x] Demo video uploaded / attached through an accepted Devpost route: `https://youtu.be/tYj9V2s5bDY`
+- [x] Under-3-minute functioning demo video generated locally at `media/tmp/h0-functioning-demo/revenue-intake-ledger-h0-functioning-demo.mp4`
+- [x] Demo video uploaded / attached through an accepted Devpost route: `https://youtu.be/sGeT3OtkBks`
 - [x] Devpost final page shows `Project submitted!`
 
 Submitted project:

@@ -197,11 +197,11 @@ export const seedEvidenceItems: EvidenceItem[] = [
   {
     id: "h0-demo-video",
     opportunityId: "h0",
-    label: "3-5 minute demo video",
+    label: "Under-3-minute functioning demo video",
     kind: "public_url",
     status: "attached",
-    url: "https://youtu.be/tYj9V2s5bDY",
-    note: "Updated Natural English narrated demo uploaded as an unlisted YouTube video."
+    url: "https://youtu.be/sGeT3OtkBks",
+    note: "Updated functioning demo uploaded to PETOPIA AI. It shows the live Vercel app, DynamoDB-backed APIs, and the action queue in 1:57."
   },
   {
     id: "h0-final-submit-proof",
@@ -243,7 +243,7 @@ export const seedPayoutTasks: PayoutTask[] = [
   {
     id: "h0-demo-video",
     opportunityId: "h0",
-    label: "Upload 3-5 minute demo video",
+    label: "Upload under-3-minute functioning demo video",
     status: "done",
     due: "Completed before final submit",
     owner: "builder"
@@ -367,9 +367,9 @@ export const h0ProofRequirements: ProofRequirement[] = [
     note: "Redacted AWS Console screenshot captured for the RevenueIntakeLedger table."
   },
   {
-    label: "3-5 minute demo video",
+    label: "Under-3-minute functioning demo video",
     status: "done",
-    note: "Updated Natural English final demo uploaded to YouTube: https://youtu.be/tYj9V2s5bDY"
+    note: "Updated functioning final demo uploaded to PETOPIA AI: https://youtu.be/sGeT3OtkBks"
   },
   {
     label: "Devpost final submitted state",

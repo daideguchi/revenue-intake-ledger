@@ -42,7 +42,7 @@ AIで作った後の「証拠・締切・費用・入金確認」を忘れない
 The first screen is built so a reviewer can verify the product quickly:
 
 1. Open the Devpost submission.
-2. Watch the 3-minute demo video.
+2. Watch the under-3-minute functioning demo video.
 3. Inspect live DynamoDB data through `/api/h0-bundle`.
 
 The hero proof links also expose `/api/proof` and `/api/action-queue`, so reviewers can confirm that the app is not just a static mockup.
@@ -50,7 +50,7 @@ The hero proof links also expose `/api/proof` and `/api/action-queue`, so review
 Japanese:
 
 ```text
-30秒で、Devpost提出・3分デモ・DynamoDB実データを確認できます。
+30秒で、Devpost提出・3分未満の動作デモ・DynamoDB実データを確認できます。
 画面右上の切り替えで、日本語だけのUIとして読めます。
 ```
 
@@ -67,7 +67,7 @@ Vercel Team ID: team_qU2jjQVZXVCwq9lXlmxu4aaM
 Devpost submission: https://devpost.com/software/revenue-intake-ledger
 Product submission: submitted
 AWS DB proof: connected and verified
-Demo video: https://youtu.be/tYj9V2s5bDY
+Demo video: https://youtu.be/sGeT3OtkBks
 H0 build note: https://revenue-intake-ledger-public.vercel.app/h0-build-note
 Cost policy: no out-of-pocket spend allowed
 ```
@@ -193,7 +193,7 @@ The current credit-backed improvement is intentionally small: extra DynamoDB rec
 - DynamoDB action queue proof: done
 - AWS storage configuration screenshot: captured
 - Architecture diagram
-- 3-5 minute demo video: https://youtu.be/tYj9V2s5bDY
+- Under-3-minute functioning demo video: https://youtu.be/sGeT3OtkBks
 - Devpost finalization page showing submitted state: done
 
 Submitted project:
