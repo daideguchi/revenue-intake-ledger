@@ -32,7 +32,8 @@ export default function H0BuildNotePage() {
           AI can help a solo builder ship many small products quickly. The hard part starts after launch:
           proof links, result dates, cloud-cost checks, organizer messages, and payout paperwork scatter
           across tabs and inboxes. Revenue Intake Ledger turns that follow-up work into one saved operating
-          board backed by DynamoDB.
+          board backed by DynamoDB. This build note was created for the purposes of entering the H0
+          Hackathon and documenting the product, user problem, AI workflow, and AWS database design.
         </p>
 
         <div className="article-links" aria-label="Proof links">
